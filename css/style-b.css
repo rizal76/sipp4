@@ -1,0 +1,267 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,700);
+body {
+  background: #e5e5e5;
+  color: #999;
+  padding: 0px;
+  margin: 0px;
+}
+.all-content{
+  min-height:100%;
+  position:relative
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #000;
+  font-weight: 300;
+}
+a {
+  color: #282828;
+  -webkit-transition: 300ms;
+  -moz-transition: 300ms;
+  -o-transition: 300ms;
+  transition: 300ms;
+}
+.btn {
+  font-weight: 300;
+  border: 0;
+}
+.btn.btn-primary {
+  background-color: #52b6ec;
+}
+.btn.btn-primary:hover,
+.btn.btn-primary.active {
+  background-color: #1586c3;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+a:hover,
+a:focus {
+  color: #000;
+  text-decoration: none;
+  outline: none;
+}
+#header {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0px;
+  z-index: 99999;
+}
+
+.navbar-default {
+  background: #fff;
+  border-radius: 0 0 5px 5px;
+  border: 0;
+  padding: 0;
+  -webkit-box-shadow: 0 1px 3px 0 rgba(0,0,0,.2);
+  -moz-box-shadow: 0 1px 3px 0 rgba(0,0,0,.2);
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.2);
+  overflow: hidden;
+}
+.navbar-default .first a {
+  border-radius: 0 0 0 5px;
+}
+.navbar-default .navbar-brand {
+  margin-right: 70px;
+  margin-left: 270px;
+  width: 700px;
+  height: 78px;
+  background: url(../images/logo.png) no-repeat 0 50%;
+}
+.navbar-default .navbar-nav > li {
+  margin-left: 1px;
+}
+.navbar-default .navbar-nav > li > a {
+  padding: 30px 25px;
+  font-size: 16px;
+  line-height: 18px;
+  color: #999;
+}
+.navbar-default .navbar-nav > li > a > i {
+  display: inline-block;
+}
+.navbar-default .navbar-nav > li.active > a,
+.navbar-default .navbar-nav > li.active:focus > a,
+.navbar-default .navbar-nav > li.active:hover > a,
+.navbar-default .navbar-nav > li:hover > a,
+.navbar-default .navbar-nav >  > li li:focus > a,
+.navbar-default .navbar-nav > li.active > a:focus,
+.navbar-default .navbar-nav > li.a > li active:focus > a:focus,
+.navbar-default .navbar-nav > li.active:hover > a:focus,
+.navbar-default .navbar-nav > li:hover > a:focus,
+.navbar-default .navbar-nav > li:focus > a:focus {
+  background-color: #52b6ec;
+  color: #fff;
+}
+.content-warp{
+  margin-top: 78px; 
+}
+.container{
+}
+.content{
+  float: left;
+  border-left: 5px;
+  border-left-style: solid;
+  border-left-color: #3498db;
+  -webkit-box-shadow: -5px 0px 17px -8px rgba(0,0,0,0.98);
+  -moz-box-shadow: -5px 0px 17px -8px rgba(0,0,0,0.98);
+  box-shadow: -5px 0px 17px -8px rgba(0,0,0,0.98);
+}
+.menu-left{
+  width: 241px;
+  margin-left: -40px;
+  float: left;
+  font-family: Tahoma, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+.menu-left > ul{
+  list-style: none;
+
+}
+.menu-left > ul > li{
+  height: 40px;
+  padding-bottom: 10px;
+  padding-top: 7px;
+  background: url(../images/separator-menu.png) repeat-x bottom;
+}
+.menu-left > ul > li.active{
+  background: url(../images/menu-hover.png) no-repeat;
+}
+.menu-left > ul > li:hover{
+  background: url(../images/menu-hover.png) no-repeat;
+}
+.menu-left > ul > li.logout:hover{
+  background: url(../images/menu-hover-logout.png) no-repeat;
+}
+.menu-left > ul > li a{
+  display: block;
+  color: #282828;
+  margin-left: 12px;
+}
+.form-login{
+  width: 140px;
+  margin-left: 40px;
+}
+.form-login input{
+  width: 100%;
+  margin-left: 11px;
+  margin-top: 4px;
+  padding: 6px 34px 5px 2px;  
+  border: 1px solid rgb(178, 178, 178);
+  -webkit-appearance: textfield;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing : content-box;
+  box-sizing : content-box;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+.form-login p.button input{
+  width: 49%;
+  margin-left: 108px;
+  cursor: pointer;  
+  background: #3498db;
+  padding: 2px 5px;
+  color: #fff;
+  font-size: 16px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px; 
+}
+.form-login h3{
+  margin-left: 11px;
+  font-size: 17px;
+  font-weight: bold;
+}
+.daftar{
+  width: 250px;
+  margin-left: 11px;
+}
+.daftar a{
+  margin-left: 20px;  
+  color: #3498db;
+}
+.daftar a:hover{
+  color: #282828;
+}
+.contents{
+  float: left;
+  width: 934px;
+  min-height: 529px;
+  background-color: #fff;
+  -webkit-box-shadow: -5px 0px 17px -8px rgba(0,0,0,0.98);
+  -moz-box-shadow: -5px 0px 17px -8px rgba(0,0,0,0.98);
+  box-shadow: -5px 0px 17px -8px rgba(0,0,0,0.98);
+}
+.content-right{
+  float: left;
+}
+.text-content{
+  padding-top: 12px;
+  font-family: Tahoma, Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  margin-left: 12px;
+  color: #282828;
+}
+.judul{
+  width: 934px;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+.daftar-lowongan{
+  width: 80%;
+  margin: 0 auto;
+}
+.daftar-lowongan tr{
+  font-size: 16px;
+}
+.daftar-lowongan td{
+  border-spacing: 10px;
+  list-style: square;
+  padding: 10px 90px 10px 50px;
+}
+.daftar-lowongan td:hover{
+  background: #52b6ec;
+  border-radius: 5px;
+}
+.text-content input{
+  width: 100%;
+  margin-top: 4px;
+  padding: 8px 5px 5px 2px;  
+  border: 1px solid rgb(178, 178, 178);
+  -webkit-appearance: textfield;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing : content-box;
+  box-sizing : content-box;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+.text-content p.button input{
+  width: 15%;
+  margin-right: -9px;
+  float: right;
+  cursor: pointer;  
+  background: #3498db;
+  padding: 2px 4px;
+  color: #fff;
+  font-size: 16px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px; 
+}
+.footer{
+  background: #0f629b;
+  line-height: 40px;
+  min-width: 980px;
+  height: 60px;
+  padding: 0px;
+  margin: 0px;
+}
