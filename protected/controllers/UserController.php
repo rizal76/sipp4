@@ -29,7 +29,7 @@ class UserController extends Controller {
 
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('captcha'),
+                'actions' => array('captcha','loginPage'),
                 'users' => array('*'),
             ),
             array('allow', // allow all users to perform 'index' and 'view' actions
@@ -222,6 +222,10 @@ class UserController extends Controller {
         ));
     }
 
+    public function actionLoginPage()
+    {
+        $this->render('login');
+    }
     /**
      * Returns the data model based on the primary key given in the GET variable.
      * If the data model is not found, an HTTP exception will be raised.

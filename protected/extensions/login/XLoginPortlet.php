@@ -72,6 +72,7 @@ class XLoginPortlet extends XPortlet
 				$duration=0;
 			//$user->addError($user->username, $user->password );
 			Yii::app()->user->login($identity ,$duration);
+			//header('Location:'.Yii::app()->request->baseUrl);
 			return true;
 		}
 		else

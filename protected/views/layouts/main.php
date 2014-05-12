@@ -8,12 +8,29 @@
 	<title><?php echo Yii::app()->name;  ?></title>
 	<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/style.css" rel="stylesheet">
 	<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.css" rel="stylesheet">
+	
+	<?php 
+    	Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/bootstrap.css');
+    	Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/jquery.js');     
+    	Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/bootstrap.js'); 
+	?> 
 	<!--<link href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.min.css" rel="stylesheet">
 	<link href="<?php echo Yii::app()->request->baseUrl; ?>/css/style-r.css" rel="stylesheet">
 	<link href="<?php echo Yii::app()->request->baseUrl; ?>/css/style-b.css" rel="stylesheet">-->
-</head><!--/head-->
-
-<body>
+	<script>function pop() {
+  		$('.pop').popover();
+  	}
+  	$(document).ready(function(){
+	  $('.pop').popover({ 
+	    html : true,
+	    content: function() {
+	      return $('.log').html();
+	    }
+	  });
+	});
+  	</script>
+</head>
+<body onload="pop()">
 	<div class="frame">
 		<div class="header">
 			<div class="head">
@@ -23,9 +40,18 @@
 							<li><a href="<?php echo Yii::app()->request->baseUrl; ?>"><img src="images/logo.png" ></a></li>
 						</div>
 						<div class="right-nav">
+							    	
+
 							<li><?php echo CHtml::link('Kenapa TRASPAC', array('/site/page', 'view'=>'kenapa')); ?></li>
 							<li class="active"><a href=<?php echo Yii::app()->request->baseUrl; ?>>Info Lowongan</a></li>
-							
+							<?php 
+							if(Yii::app()->user->isGuest)
+							{
+							echo "<a type='button' class='pop' data-container='body' data-toggle='popover' data-placement='bottom' data-content='' data-html='true'>
+  								login
+							</a>";
+							}
+							?>
 							<?php 
 								/////////////////MENU UNTUK MASING MASING ROLE ////////////
 								if(!Yii::app()->user->isGuest) {
@@ -74,10 +100,11 @@
 					</ul>	
 				</div>
 			</div>
-			<div class="log">
+			<div class="log" style="display:none">
+				
 				<?php $this->widget('application.extensions.login.XLoginPortlet',array(
-				    'visible'=>Yii::app()->user->isGuest,
-					));
+					'visible'=>Yii::app()->user->isGuest,
+				));
 				?>
 			</div>
 			

@@ -49,6 +49,7 @@
 							$this->widget('zii.widgets.jui.CJuiDatePicker',array(
 								'name'=>'tanggal_lahir',
 								'model'=>$model,
+
 								'attribute'=>'tanggal_lahir',
 			    // additional javascript options for the date picker plugin
 								'options'=>array(
@@ -56,11 +57,11 @@
 									'dateFormat'=>'yy-mm-dd',
 									),
 								'htmlOptions'=>array(
-									'style'=>'height:20px;'
+									'type'=>'date'
 									),
-									)); ?></td>
-									<?php echo $form->error($model,'tanggal_lahir'); ?>
-								</tr>
+						)); ?></td>
+						<?php echo $form->error($model,'tanggal_lahir'); ?>
+					</tr>
 								<tr>
 									<th><?php echo $form->labelEx($model,'jenis_kelamin'); ?></th>
 									<td><?php echo $form->dropDownList($model,'jenis_kelamin',array(
