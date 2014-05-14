@@ -41,7 +41,8 @@ $('.search-form form').submit(function(){
     ?>
 </div><!-- search-form -->
 <hr>
-<?php echo CHtml::button('Create Admin', array('submit' => array('user/createAdmin'), 'class' => 'btn btn-primary btn-sm')); ?>
+<?php echo CHtml::link('Create Admin',array('user/createAdmin'), array('class'=>'btn btn-primary btn-sm')); ?>
+
 
 <?php
 $this->widget('zii.widgets.grid.CGridView', array(

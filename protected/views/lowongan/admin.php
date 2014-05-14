@@ -40,7 +40,8 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 )); ?>
 </div><!-- search-form -->
 <hr>
-<?php echo CHtml::button('Create Lowongan', array('submit' => array('lowongan/create'), 'class'=>'btn btn-primary btn-sm')); ?>
+
+<?php echo CHtml::link('Create Lowongan',array('lowongan/create'), array('class'=>'btn btn-primary btn-sm')); ?>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'lowongan-grid',
