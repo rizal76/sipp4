@@ -78,11 +78,11 @@
                                 endforeach;
                             }
                             ?></tr>
-                            <tr>
-                                <td><?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('class' =>'btn btn-primary btn-sm')); ?></td>
-                            </tr>
-                        </tbody>
+                               </tbody>
                     </table>
+                    <br>
+                            <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('class' =>'btn btn-primary btn-sm')); ?>
+                     
                     <?php $this->endWidget(); ?>
 
 </div><!-- form -->

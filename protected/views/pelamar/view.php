@@ -8,7 +8,6 @@ echo '<div class="flash-' . $key . '">' . $message . "</div>\n";
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id',
 		'no_ktp',
 		'nama',
 		'tempat_lahir',
@@ -42,7 +41,6 @@ foreach ($pengalamans as $j=>$item) {
 	$this->widget('zii.widgets.grid.CDetailView', array(
 		'data'=>$pengalamans[$j],
 		'attributes'=>array(
-			'id',
 			'nama_perusahaan',
 			'gaji_terkahir',
 			'tanggal_mulai',

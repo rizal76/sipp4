@@ -10,14 +10,12 @@ echo '<div class="flash-' . $key . '">' . $message . "</div>\n";
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id',
 		'nama',
 		'deskripsi',
 		'persyaratan',
 	),
 )); ?>
-
-
+<br>
 <?php 
 //yg boleh lamar hanya pelamar
 if(Yii::app()->user->isMember()) {

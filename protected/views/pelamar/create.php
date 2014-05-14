@@ -13,6 +13,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Create Pelamar</h1>
+<h1>Isi Data Diri</h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model, 'pengalamans'=>$pengalamans)); ?>

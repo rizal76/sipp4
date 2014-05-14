@@ -22,7 +22,7 @@
 
 				<div class="row">
 					<div class="col-sm-2">
-						<?php echo $form->emailField($model,'username',array('class'=>'form-control','placeholder'=>'username*', 'id'=>'nama', 'size'=>30,'maxlength'=>30)); ?>
+						<?php echo $form->emailField($model,'username',array('class'=>'form-control','placeholder'=>'email*', 'id'=>'nama', 'size'=>30,'maxlength'=>30)); ?>
 					</div>
 				</div>
 				<?php
@@ -42,8 +42,7 @@
 				</div>
 			</div>
 
-
-			<div class="row"> 
+ 
 				<?php if (extension_loaded('gd')): ?> 
 					<div class="row"> 
 						<?php echo CHtml::activeLabelEx($model, 'verifyCode') ?> 
@@ -52,17 +51,16 @@
 
 						</div> 
 					</div> 
+					<div class="row"> 
 					<div class="col-sm-2">
 						<?php echo CHtml::activeTextField($model,'verifyCode', array('class'=>'form-control', 'placeholder'=>'verify code*')); ?> 
 					</div>
+					</div>
 				<?php endif; ?> 
-			</div>
-			<div class="row-button">
+		
 				<p class="login button">
-					<?php echo CHtml::submitButton( $model->isNewRecord ? 'Create' : 'Save',  array(
-					'value'=>'Daftar', 'class'=>'btn btn-primary btn-sm' )); ?>
+					<?php echo CHtml::submitButton( $model->isNewRecord ? 'Create' : 'Save',  array('value'=>'Daftar', 'class'=>'btn btn-primary btn-sm' )); ?>
 				</p>
-			</div>
 			<?php $this->endWidget(); ?>
 		</div>
 </div><!-- form -->

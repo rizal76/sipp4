@@ -28,32 +28,30 @@
 foreach ($tahaps as $i => $item): ?>
             <?php echo $form->labelEx($item, $item->tahaps->nama); ?>
 
-        <div class="row">
+                   
+        
             <?php echo $form->hiddenField($item, '[' . $count . ']id_tahap', array('value' => $item->id_tahap)); ?>
             <?php echo $form->error($item, '[' . $count . ']id_tahap'); ?>
-        </div>
-        <div class="row">
+      
             <?php echo $form->hiddenField($item, '[' . $count . ']id_lowongan', array('value' => $idLowongan)); ?>
             <?php echo $form->error($item, '[' . $count . ']id_lowongan'); ?>
-        </div>
-        <div class="row">
-    <?php echo $form->labelEx($item, 'deskripsi'); ?>
-    <?php echo $form->textArea($item, '[' . $count . ']deskripsi', array('size' => 60, 'maxlength' => 500)); ?>
-            <?php echo $form->error($item, 'deskripsi'); ?>
-        </div>
+   <table class="table-condensed">
+                <tbody>
+        <tr> 
+    <th><?php echo $form->labelEx($item, 'deskripsi'); ?></th>
+    <td><?php echo $form->textArea($item, '[' . $count . ']deskripsi', array('size' => 60, 'maxlength' => 500)); ?></td>
+        </tr>
+        <tr>
+    <th><?php echo $form->labelEx($item, 'file_tugas'); ?></th>
+    <td><?php echo $form->fileField($item, '[' . $count . ']file_tugas', array('size' => 60, 'maxlength' => 500)); ?></td>
+      </tr>
 
-        <div class="row">
-    <?php echo $form->labelEx($item, 'file_tugas'); ?>
-    <?php echo $form->fileField($item, '[' . $count . ']file_tugas', array('size' => 60, 'maxlength' => 500)); ?>
-        <?php echo $form->error($item, 'file_tugas'); ?>
-        </div>
-
-
+</tbody>
+</table>
+<br>
     <?php $count++;
 endforeach; ?>
-    <div class="row buttons">
-<?php echo CHtml::submitButton('Save'); ?>
-    </div>
+<?php echo CHtml::submitButton('Simpan', array( 'class'=>'btn btn-primary btn-sm' )); ?>
 
 <?php $this->endWidget(); ?>
 

@@ -1,5 +1,5 @@
 
-
+<h1>Seleksi Administrasi</h1>
 <?php
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'lowongan-form',
@@ -48,9 +48,9 @@ $form = $this->beginWidget('CActiveForm', array(
 
     </tbody> 
 </table> 
-     <div class="row buttons">
-<?php echo CHtml::submitButton('Save'); ?>
-    </div>
+   
+<?php echo CHtml::submitButton('Simpan', array( 'class'=>'btn btn-primary btn-sm' )); ?>
+
 
 <?php $this->endWidget(); ?>
 

@@ -1,3 +1,4 @@
+<h1>Pengumuman</h1>
 <?php
 //tampilin notifikasi yang ada
 foreach (Yii::app()->user->getFlashes() as $key => $message) {
@@ -36,15 +37,14 @@ foreach ($model as $j => $modelp) {
                     <p class="note">Isi hasil tugas anda </p>
                     <?php echo $form->errorSummary($modelp); ?>
                     <?php echo $form->hiddenField($modelp, 'id', array('value' => $modelp->id)); ?>
-                    <div class="row">
+                    
                         <?php echo $form->labelEx($modelp, 'hasil_tugas'); ?>
                         <?php echo $form->fileField($modelp, 'hasil_tugas', array('size' => 30, 'maxlength' => 30)); ?>
                         <?php echo $form->error($modelp, 'hasil_tugas'); ?>
 
-                    </div>
-                    <div class="row buttons">
-                        <?php echo CHtml::submitButton($modelp->isNewRecord ? 'Create' : 'Save'); ?>
-                    </div>	
+                   <br>
+                        <?php echo CHtml::submitButton($modelp->isNewRecord ? 'Create' : 'Simpan', array( 'class'=>'btn btn-primary btn-sm' )); ?>
+               
                     <?php $this->endWidget(); ?>
 
                 </div><!-- form -->
@@ -77,7 +77,7 @@ foreach ($model as $j => $modelp) {
 
                     </div>
                     <div class="row buttons">
-                    <?php echo CHtml::submitButton($modelp->isNewRecord ? 'Create' : 'Save'); ?>
+                    <?php echo CHtml::submitButton($modelp->isNewRecord ? 'Create' : 'Simpan', array( 'class'=>'btn btn-primary btn-sm' )); ?>
                     </div>	
                 <?php $this->endWidget(); ?>
 

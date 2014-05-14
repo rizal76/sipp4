@@ -50,9 +50,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'dataProvider' => $model->search(),
     'filter' => $model,
     'columns' => array(
-        'id',
         'username',
-        'password',
         array(
             'type' => 'raw', // this is for your related group members of the current group
             'name' => 'admin.departemen', // this will access the attributeLabel from the member model class, and assign it to your column header
