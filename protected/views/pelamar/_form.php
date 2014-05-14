@@ -140,7 +140,7 @@
 										</table>	
 									</div>
 									<div id="add-pengalaman" onclick="tambah()" style="color:#428bca; cursor:pointer">tambah</div><br>
-									<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Simpan',array( 'class'=>'btn btn-primary btn-sm' )); ?>
+									<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Simpan', array( 'class'=>'btn btn-primary btn-sm' )); ?>
 									<?php $this->endWidget(); ?>
 								</div><!-- form sip -->
 								<!-- untuk tambah pengalaman -->

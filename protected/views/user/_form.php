@@ -13,7 +13,6 @@
 	// See class documentation of CActiveForm for details on this.
 			'enableAjaxValidation'=>false,
 			)); ?>
-
 			<p class="note">Fields with <span class="required">*</span> are required.</p>
 			<p class="error-msg"><?php echo $form->errorSummary($model); ?></p>
 			<?php
@@ -34,33 +33,29 @@
 				<?php
 			}
 			?>
-
-
 			<div class="row">
 				<div class="col-sm-2">
 					<?php echo $form->passwordField($model,'password',array('class'=>'form-control','placeholder'=>'password*','id'=>'password', 'size'=>30,'maxlength'=>128)); ?>
 				</div>
 			</div>
+			<?php if (extension_loaded('gd')): ?> 
+				<div class="row"> 
+					<?php echo CHtml::activeLabelEx($model, 'verifyCode') ?> 
+					<div> 
+						<?php $this->widget('CCaptcha'); ?><br/> 
 
- 
-				<?php if (extension_loaded('gd')): ?> 
-					<div class="row"> 
-						<?php echo CHtml::activeLabelEx($model, 'verifyCode') ?> 
-						<div> 
-							<?php $this->widget('CCaptcha'); ?><br/> 
-
-						</div> 
 					</div> 
-					<div class="row"> 
+				</div> 
+				<div class="row"> 
 					<div class="col-sm-2">
 						<?php echo CHtml::activeTextField($model,'verifyCode', array('class'=>'form-control', 'placeholder'=>'verify code*')); ?> 
 					</div>
-					</div>
-				<?php endif; ?> 
-		
-				<p class="login button">
-					<?php echo CHtml::submitButton( $model->isNewRecord ? 'Create' : 'Save',  array('value'=>'Daftar', 'class'=>'btn btn-primary btn-sm' )); ?>
-				</p>
+				</div>
+			<?php endif; ?> 
+			
+			<p class="login button">
+				<?php echo CHtml::submitButton( $model->isNewRecord ? 'Create' : 'Save',  array('value'=>'Daftar', 'class'=>'btn btn-primary btn-sm' )); ?>
+			</p>
 			<?php $this->endWidget(); ?>
 		</div>
 </div><!-- form -->
