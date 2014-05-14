@@ -14,80 +14,75 @@
         // There is a call to performAjaxValidation() commented in generated controller code.
         // See class documentation of CActiveForm for details on this.
         'enableAjaxValidation' => false,
-    ));
-    ?>
+        ));
+        ?>
 
-    <p class="note">Fields with <span class="required">*</span> are required.</p>
+        <p class="note">Fields with <span class="required">*</span> are required.</p>
 
         <?php echo $form->errorSummary($model); ?>
-
-    <div class="row">
-        <?php echo $form->labelEx($model, 'nama'); ?>
-<?php echo $form->textField($model, 'nama', array('size' => 30, 'maxlength' => 30)); ?>
-<?php echo $form->error($model, 'nama'); ?>
-    </div>
-
-    <div class="row">
-        <?php echo $form->labelEx($model, 'deskripsi'); ?>
-<?php echo $form->textField($model, 'deskripsi', array('size' => 60, 'maxlength' => 400)); ?>
-<?php echo $form->error($model, 'deskripsi'); ?>
-    </div>
-
-    <div class="row">
-        <?php echo $form->labelEx($model, 'persyaratan'); ?>
-<?php echo $form->textField($model, 'persyaratan', array('size' => 60, 'maxlength' => 100)); ?>
-<?php echo $form->error($model, 'persyaratan'); ?>
-    </div>
-
-    <div class="row">
-        <?php echo $form->labelEx($model, 'departemen'); ?>
-        <?php
-        if (Yii::app()->user->isSuperAdmin()) {
-            echo $form->dropDownList($model, 'departemen', array(
-                'SIS' => 'SIS',
-                'COM' => 'COM',
-                'PMO' => 'PMO',
-                'PRD' => 'PRD',
-                'IMP' => 'IMP',
-                'KOU' => 'KOU'));
-        } else {
+        <table class="table-condensed">
+            <tbody>
+                <tr>
+                    <th><?php echo $form->labelEx($model, 'nama'); ?></th>
+                    <td><?php echo $form->textField($model, 'nama', array('size' => 30, 'maxlength' => 30)); ?></td>
+                </tr>
+                <tr>
+                    <th><?php echo $form->labelEx($model, 'deskripsi'); ?></th>
+                    <td><?php echo $form->textField($model, 'deskripsi', array('size' => 60, 'maxlength' => 400)); ?></td>
+                </tr>
+                <tr>
+                    <th><?php echo $form->labelEx($model, 'persyaratan'); ?></th>
+                    <td><?php echo $form->textField($model, 'persyaratan', array('size' => 60, 'maxlength' => 100)); ?></td>
+                </tr>
+                <tr>
+                    <th><?php echo $form->labelEx($model, 'departemen'); ?></th>
+                    <td><?php
+                        if (Yii::app()->user->isSuperAdmin()) {
+                            echo $form->dropDownList($model, 'departemen', array(
+                                'SIS' => 'SIS',
+                                'COM' => 'COM',
+                                'PMO' => 'PMO',
+                                'PRD' => 'PRD',
+                                'IMP' => 'IMP',
+                                'KOU' => 'KOU'));
+                        } else {
             //cari departemen
-            $id = Yii::app()->user->id;
-            $modelAdmin = Admin::model()->findByAttributes(array('id_user' => $id));
-            echo $form->hiddenField($model, 'departemen', array('value' => $modelAdmin->departemen));
-        }
-        ?>
-        <?php echo $form->error($model, 'departemen'); ?>
-    </div>
-    <div class="row">
-        <?php echo $form->labelEx($model, 'new'); ?>
-        <?php
-        echo $form->dropDownList($model, 'new', array(
-            '1' => 'Yes',
-            '0' => 'No'));
-        ?>
-<?php echo $form->error($model, 'new'); ?>
-    </div>
-    <!-- Nampilin check box tahapan -->
-    <?php if ($this->action->Id == 'create') { ?>
-            <?php foreach ($tahaps as $i => $item): ?>
-            <div class="row">
-                <?php echo $form->labelEx($item, $item->nama); ?>
-                <?php echo $form->checkBox($item, '[' . $i . ']nama', array('value' => 1, 'uncheckValue' => 0)); ?>
-        <?php echo $form->error($item, '[' . $i . ']nama'); ?>
-            </div>
-            <div class="row">
-                <?php echo $form->hiddenField($item, '[' . $i . ']id', array('value' => $item->id)); ?>
-            <?php echo $form->error($item, '[' . $i . ']id'); ?>
-            </div>
-        <?php
-        endforeach;
-    }
-    ?>
-    <div class="row buttons">
-    <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-    </div>
+                            $id = Yii::app()->user->id;
+                            $modelAdmin = Admin::model()->findByAttributes(array('id_user' => $id));
+                            echo $form->hiddenField($model, 'departemen', array('value' => $modelAdmin->departemen));
+                        }
+                        ?></td>
+                    </tr>
+                    <tr>
+                        <th><?php echo $form->labelEx($model, 'Tampilkan*'); ?></th>
+                        <td>
+                            <?php
+                            echo $form->dropDownList($model, 'new', array(
+                                '1' => 'Yes',
+                                '0' => 'No'));
+                                ?>
+                                <?php echo $form->error($model, 'new'); ?></td>
+                            </tr>
+                            <!-- Nampilin check box tahapan -->
+                            <?php if ($this->action->Id == 'create') { ?>
+                            <?php foreach ($tahaps as $i => $item): ?>
+                               <tr>
+                                <th><?php echo $form->labelEx($item, $item->nama); ?></th>
+                                <td><?php echo $form->checkBox($item, '[' . $i . ']nama', array('value' => 1, 'uncheckValue' => 0)); ?>
+                                    <?php echo $form->error($item, '[' . $i . ']nama'); ?></td>
+                                </tr>
+                                <tr><?php echo $form->hiddenField($item, '[' . $i . ']id', array('value' => $item->id)); ?>
+                                <?php echo $form->error($item, '[' . $i . ']id'); ?>
 
-<?php $this->endWidget(); ?>
+                                <?php
+                                endforeach;
+                            }
+                            ?></tr>
+                            <tr>
+                                <td><?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('class' =>'btn btn-primary btn-sm')); ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <?php $this->endWidget(); ?>
 
 </div><!-- form -->

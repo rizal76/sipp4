@@ -155,7 +155,7 @@
 													</tbody>
 												</table>	
 											</div>
-											<div id="add-pengalaman" onclick="tambah()">tambah</div>
+											<div id="add-pengalaman" onclick="tambah()">tambah</div><br>
 											<div class="row buttons">
 												<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array( 'class'=>'btn btn-primary btn-sm' )); ?>
 											</div>

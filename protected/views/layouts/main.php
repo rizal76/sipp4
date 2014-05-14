@@ -48,7 +48,7 @@
 							if(Yii::app()->user->isGuest)
 							{
 							echo "<a type='button' class='pop' data-container='body' data-toggle='popover' data-placement='bottom' data-content='' data-html='true'>
-  								login
+  								Login
 							</a>";
 							}
 							?>
