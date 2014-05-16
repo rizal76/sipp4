@@ -11,7 +11,7 @@
 		echo '<div class="flash-' . $key . '">' . $message . "</div>\n";
 	}
 	?>
-	
+
 	<?php $form=$this->beginWidget('CActiveForm', array(
 		'id'=>'pelamar-form',
 	// Please note: When you enable ajax validation, make sure the corresponding
