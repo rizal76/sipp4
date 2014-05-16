@@ -1,5 +1,3 @@
-<div class="judul" style="text-align:center">
-	<h1>Update Admin <?php echo $model->id; ?></h1>
-</div>
+<h1>Update Admin <?php echo $model->id; ?></h1>
 
 <?php $this->renderPartial('_formAdmin', array('model'=>$model, 'admin'=>$admin)); ?>
