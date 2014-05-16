@@ -23,8 +23,8 @@ class PelamarController extends Controller {
      * @return array access control rules
      */
     public function accessRules() {
-         $id = Yii::app()->request->getParam('id');
-         $self = $this->getSelfAccess($id);
+        $id = Yii::app()->request->getParam('id');
+        $self = $this->getSelfAccess($id);
         return array(
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array('update', 'view'),
@@ -198,7 +198,7 @@ class PelamarController extends Controller {
      * @param integer $id the ID of the model to be deleted
      */
     public function actionDelete($id) {
-        $model =  $this->loadModel($id);
+        $model = $this->loadModel($id);
         unlink(Yii::app()->basePath . '/../cv/' . $model->cv);
 
         $model->delete();
@@ -222,9 +222,13 @@ class PelamarController extends Controller {
      * Manages all models.
      */
     public function actionAdmin() {
-        $records = Pelamar::model()->findAll();
+        $model = new Pelamar('search');
+        $model->unsetAttributes();  // clear any default values
+        if (isset($_GET['Pelamar']))
+            $model->attributes = $_GET['Pelamar'];
+
         $this->render('admin', array(
-            'model' => $records,
+            'model' => $model,
         ));
     }
 
@@ -281,21 +285,20 @@ class PelamarController extends Controller {
             Yii::app()->end();
         }
     }
-    
-      protected function getSelfAccess($id) {
+
+    protected function getSelfAccess($id) {
         $allow;
-        
+
         if (!Yii::app()->user->isGuest) { //if it is user, check if it is self
             if ($id == Yii::app()->user->id)
             //return true;
                 $allow = Yii::app()->user->getName();
         }
-        if(!empty($allow)){
-            return  $allow;
+        if (!empty($allow)) {
+            return $allow;
         } else {
             return false;
         }
-       
     }
 
 }
