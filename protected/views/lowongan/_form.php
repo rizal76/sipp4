@@ -28,11 +28,11 @@
                 </tr>
                 <tr>
                     <th><?php echo $form->labelEx($model, 'deskripsi'); ?></th>
-                    <td><?php echo $form->textArea($model, 'deskripsi', array('size' => 60, 'maxlength' => 400)); ?></td>
+                    <td><?php echo $form->textField($model, 'deskripsi', array('size' => 60, 'maxlength' => 400)); ?></td>
                 </tr>
                 <tr>
                     <th><?php echo $form->labelEx($model, 'persyaratan'); ?></th>
-                    <td><?php echo $form->textArea($model, 'persyaratan', array('size' => 60, 'maxlength' => 100)); ?></td>
+                    <td><?php echo $form->textField($model, 'persyaratan', array('size' => 60, 'maxlength' => 100)); ?></td>
                 </tr>
                 <tr>
                     <th><?php echo $form->labelEx($model, 'departemen'); ?></th>
@@ -81,7 +81,7 @@
                                </tbody>
                     </table>
                     <br>
-                            <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Simpan', array('class' =>'btn btn-primary btn-sm')); ?>
+                            <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('class' =>'btn btn-primary btn-sm')); ?>
                      
                     <?php $this->endWidget(); ?>
 
