@@ -22,7 +22,7 @@ $('.search-form form').submit(function(){
 
 $this->widget('application.extensions.tablesorter.Sorter', array(
     'data'=>$model,
-    'columns'=>array(
+    'columns'=>array(	
         'nama',
         'tanggal_lahir', 
         'jenis_kelamin', 

@@ -47,8 +47,8 @@ class Sorter extends CWidget
 		$bu = Yii::app()->assetManager->publish(dirname(__FILE__) . '/assets/');
         $cs = Yii::app()->clientScript;
         //Intialize CSS
-        //$cs->registerCssFile($bu . '/css/tablesorter.css');
-		//$cs->registerCssFile($bu . '/css/tablesorter.pager.css');
+  //       $cs->registerCssFile($bu . '/css/tablesorter.css');
+		// $cs->registerCssFile($bu . '/css/tablesorter.pager.css');
 		$cs->registerCssFile($bu . '/css/bootstrap.css');
 		//Intialize Jquery
 		$cs->registerScriptFile($bu . '/js/jquery-1.10.2.js');
