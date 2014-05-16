@@ -39,7 +39,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'model'=>$model,
 )); ?>
 </div><!-- search-form -->
-<hr><hr
+<hr>
 
 <?php echo CHtml::link('Create Lowongan',array('lowongan/create'), array('class'=>'btn btn-primary btn-sm')); ?>
 
