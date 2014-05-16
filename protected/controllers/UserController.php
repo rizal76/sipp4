@@ -29,7 +29,7 @@ class UserController extends Controller {
 
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('captcha','loginPage'),
+                'actions' => array('captcha', 'loginPage'),
                 'users' => array('*'),
             ),
             array('allow', // allow all users to perform 'index' and 'view' actions
@@ -40,6 +40,7 @@ class UserController extends Controller {
                 'actions' => array('create', 'update', 'forget'),
                 //'users'=>array('*'),
                 'expression' => 'Yii::app()->user->isGuest',
+                'deniedCallback' => $this->redirect('/'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
                 'actions' => array('updateAdmin', 'viewAdmin', 'delete', 'admin', 'createAdmin'),
@@ -58,7 +59,7 @@ class UserController extends Controller {
 
     protected function getSelfAccess($id) {
         $allow = array();
-        
+
         if (!Yii::app()->user->isGuest) { //if it is user, check if it is self
             if ($id == Yii::app()->user->id)
             //return true;
@@ -107,16 +108,16 @@ class UserController extends Controller {
             $model->level_id = 0;
             //}
 
-            if ($model->save()){
+            if ($model->save()) {
                 $daftar = true;
                 $this->render('sukses', array('model' => $model,));
             }
         }
-        if(!$daftar){
-            
-        $this->render('create', array(
-            'model' => $model,
-        ));
+        if (!$daftar) {
+
+            $this->render('create', array(
+                'model' => $model,
+            ));
         }
     }
 
@@ -222,10 +223,10 @@ class UserController extends Controller {
         ));
     }
 
-    public function actionLoginPage()
-    {
+    public function actionLoginPage() {
         $this->render('login');
     }
+
     /**
      * Returns the data model based on the primary key given in the GET variable.
      * If the data model is not found, an HTTP exception will be raised.
@@ -277,33 +278,30 @@ class UserController extends Controller {
         );
     }
 
-   
-	public function actionForget()
-	{
-		$model=new User;
-		if(isset($_POST['User']))
-		{
-				$model->attributes=$_POST['User'];
-				$user = User::model()->find('LOWER(username)=?', array($model->username)); 
-				//cek jika 
-                               // $model->scenario = 'forget';
-				if($user!=null){
-					//make a verifed code
-					$verCode = $user->hashPassword($user->password);
-					//save to database
-					$connection=Yii::app()->db;
-					$sql = "REPLACE INTO sipp_code_user (id_user, verified_code) VALUES ('$user->id' ,'$verCode');";
-					$command=$connection->createCommand($sql);
-					$rowCount=$command->execute();
-					//send to email
-					$user->sendMail($model->username, $verCode);
-                                        Yii::app()->user->setFlash('success', "Success ! Please check your email inbox !");
-				} else {
-                                    Yii::app()->user->setFlash('error', "Forget password failed! ");
-                                }
-		}
-		// display the login form
-		$this->render('forget',array('model'=>$model));
-	}
+    public function actionForget() {
+        $model = new User;
+        if (isset($_POST['User'])) {
+            $model->attributes = $_POST['User'];
+            $user = User::model()->find('LOWER(username)=?', array($model->username));
+            //cek jika 
+        
+            if ($user != null) {
+                //make a verifed code
+                $verCode = $user->hashPassword($user->password);
+                //save to database
+                $connection = Yii::app()->db;
+                $sql = "REPLACE INTO sipp_code_user (id_user, verified_code) VALUES ('$user->id' ,'$verCode');";
+                $command = $connection->createCommand($sql);
+                $rowCount = $command->execute();
+                //send to email
+                $user->sendMail($model->username, $verCode);
+                Yii::app()->user->setFlash('success', "Sukses ! Silahkan periksa inbox email anda");
+            } else {
+                Yii::app()->user->setFlash('error', "Gagal ! Email tidak terdaftar ! ");
+            }
+        }
+        // display the login form
+        $this->render('forget', array('model' => $model));
+    }
 
 }
