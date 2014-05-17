@@ -57,7 +57,7 @@ $('.search-form form').submit(function(){
  		'jurusan',
  		'tahun_lulus',
  		'skill',
- 		'cover_letter',
+ 		'gaji',
  		'cv',
  		*/
  		array(

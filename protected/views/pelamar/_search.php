@@ -92,8 +92,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'cover_letter'); ?>
-		<?php echo $form->textField($model,'cover_letter',array('size'=>30,'maxlength'=>30)); ?>
+		<?php echo $form->label($model,'gaji'); ?>
+		<?php echo $form->textField($model,'gaji',array('size'=>30,'maxlength'=>30)); ?>
 	</div>
 
 	<div class="row">

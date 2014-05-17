@@ -112,7 +112,7 @@
 											</tr>
 											<tr>
 												<th><?php echo $form->labelEx($model,'Gaji*'); ?></th>
-												<td><?php echo $form->textArea($model,'cover_letter',array('size'=>100,'maxlength'=>30)); ?></td>
+												<td><?php echo $form->textArea($model,'gaji',array('size'=>100,'maxlength'=>30)); ?></td>
 											</tr>
 											<tr>
 												<th><?php echo $form->labelEx($model,'File CV'); ?></th>

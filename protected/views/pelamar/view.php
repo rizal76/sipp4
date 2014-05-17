@@ -23,7 +23,7 @@ echo '<div class="flash-' . $key . '">' . $message . "</div>\n";
 		'jurusan',
 		'tahun_lulus',
 		'skill',
-		'cover_letter',
+		'gaji',
 		array(               // cv
             'label'=>'CV',
             'type'=>'raw',

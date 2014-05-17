@@ -70,8 +70,8 @@
 	<?php echo CHtml::encode($data->skill); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('cover_letter')); ?>:</b>
-	<?php echo CHtml::encode($data->cover_letter); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('gaji')); ?>:</b>
+	<?php echo CHtml::encode($data->gaji); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('cv')); ?>:</b>

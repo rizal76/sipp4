@@ -57,7 +57,7 @@ $this->widget('application.extensions.tablesorter.Sorter', array(
 // 		'jurusan',
 // 		'tahun_lulus',
 // 		'skill',
-// 		'cover_letter',
+// 		'gaji',
 // 		'cv',
 // 		*/
 // 		array(

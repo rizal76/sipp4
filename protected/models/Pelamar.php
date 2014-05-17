@@ -20,7 +20,7 @@
  * @property string $jurusan
  * @property string $tahun_lulus
  * @property string $skill
- * @property string $cover_letter
+ * @property string $gaji
  * @property string $cv
  */
 class Pelamar extends CActiveRecord {
@@ -39,10 +39,10 @@ class Pelamar extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('no_ktp, nama, tempat_lahir, tanggal_lahir, jenis_kelamin, status, jumlah_anak, alamat, kota, tlp, pendidikan, tahun_lulus, skill, cover_letter, cv', 'required'),
+            array('no_ktp, nama, tempat_lahir, tanggal_lahir, jenis_kelamin, status, jumlah_anak, alamat, kota, tlp, pendidikan, tahun_lulus, skill, gaji, cv', 'required'),
             array('jumlah_anak', 'numerical', 'integerOnly' => true),
             array('no_ktp, tempat_lahir, jenis_kelamin, status, kota, tlp, jurusan', 'length', 'max' => 20),
-            array('nama, cover_letter', 'length', 'max' => 30),
+            array('nama, gaji', 'length', 'max' => 30),
             array('alamat', 'length', 'max' => 999),
             array('pendidikan, jenjang', 'length', 'max' => 10),
             array('tahun_lulus', 'length', 'max' => 4),
@@ -50,7 +50,7 @@ class Pelamar extends CActiveRecord {
             array('cv', 'file', 'types' => 'pdf'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, no_ktp, nama, tempat_lahir, tanggal_lahir, jenis_kelamin, status, jumlah_anak, alamat, kota, tlp, pendidikan, jenjang, jurusan, tahun_lulus, skill, cover_letter, cv', 'safe', 'on' => 'search'),
+            array('id, no_ktp, nama, tempat_lahir, tanggal_lahir, jenis_kelamin, status, jumlah_anak, alamat, kota, tlp, pendidikan, jenjang, jurusan, tahun_lulus, skill, gaji, cv', 'safe', 'on' => 'search'),
         );
     }
 
@@ -87,7 +87,7 @@ class Pelamar extends CActiveRecord {
             'jurusan' => 'Jurusan',
             'tahun_lulus' => 'Tahun Lulus',
             'skill' => 'Skill',
-            'cover_letter' => 'Gaji',
+            'gaji' => 'Gaji',
             'cv' => 'Cv',
         );
     }
@@ -125,7 +125,7 @@ class Pelamar extends CActiveRecord {
         $criteria->compare('jurusan', $this->jurusan, true);
         $criteria->compare('tahun_lulus', $this->tahun_lulus, true);
         $criteria->compare('skill', $this->skill, true);
-        $criteria->compare('cover_letter', $this->cover_letter, true);
+        $criteria->compare('gaji', $this->gaji, true);
         $criteria->compare('cv', $this->cv, true);
 
         return new CActiveDataProvider($this, array(
