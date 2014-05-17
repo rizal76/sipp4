@@ -31,7 +31,7 @@
 			</div>
 
 			
-				</div></br></br>
+				</div>
 				<div class="row button">
 					<p class="login button">
 						<?php echo CHtml::submitButton('Kirim',array( 'class'=>'btn btn-primary btn-sm' )); ?>

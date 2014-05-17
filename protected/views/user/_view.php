@@ -3,7 +3,7 @@
 /* @var $data User */
 ?>
 
-<div class="view">
+<div class="view" style="text-align:center">
 
 	<b> Selamat </b>
 	<b><?php echo CHtml::encode($data->getAttributeLabel('username')); ?>:</b>

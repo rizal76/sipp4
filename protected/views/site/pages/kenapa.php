@@ -1,5 +1,6 @@
 <div class="kenapa-traspac">
 <h2>Kenapa TRASPAC</h2>
+<hr>
 <ul>
 	<li>Kesejahteraan</li>
 	<li>HOPE</li>

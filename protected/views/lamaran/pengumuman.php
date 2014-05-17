@@ -1,4 +1,5 @@
 <h1>Pengumuman</h1>
+<hr>
 <?php
 //tampilin notifikasi yang ada
 foreach (Yii::app()->user->getFlashes() as $key => $message) {
@@ -8,7 +9,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 
 <?php
 if (count($model) == 0) {
-    echo "<h2>Tidak ada pengumuman</h2>";
+    echo "Tidak ada pengumuman";
 }
 foreach ($model as $j => $modelp) {
     echo 'Nama Lowongan: ' . $modelp->lowongan->nama . '<br>';

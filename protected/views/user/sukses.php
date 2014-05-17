@@ -9,8 +9,8 @@ $this->breadcrumbs=array(
 
 
 ?>
-
-<h2>Selamat  <?php echo $model->username; ?> telah terdaftar. Silahkan isi data diri untuk melamar pekerjaan yang anda minati.
-</h2>
-
+<div style="text-align:center">
+<h4>Selamat  <?php echo $model->username; ?> telah terdaftar.</h4>
+Silahkan isi data diri untuk melamar pekerjaan yang anda minati.
+</div>
 
