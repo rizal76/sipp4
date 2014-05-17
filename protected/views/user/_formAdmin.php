@@ -21,7 +21,7 @@
 
 			<div class="row">
 				<div class="col-sm-2">
-					<?php echo $form->textField($model,'username',array('placeholder'=>'masukan username*', 'id'=>'nama', 'size'=>30,'maxlength'=>30, 'class'=>'form-control')); ?>
+					<?php echo $form->emailField($model,'username',array('placeholder'=>'masukan username*', 'id'=>'nama', 'size'=>30,'maxlength'=>30, 'class'=>'form-control')); ?>
 				</div>
 			</div>
 
@@ -45,19 +45,7 @@
 					</div>
 				</div>
 
-				<?php if (extension_loaded('gd')): ?> 
-					<div class="row"> 
-						<?php echo CHtml::activeLabelEx($model, 'verifyCode') ?>
-						<div> 
-							<?php $this->widget('CCaptcha'); ?><br/> 
-						</div> 
-					</div> 
-					<div class="row"> 
-						<div class="col-sm-2">
-							<?php echo CHtml::activeTextField($model,'verifyCode', array('class'=>'form-control', 'placeholder'=>'Verify Code*')); ?> 
-						</div>
-					</div>
-				<?php endif; ?> 
+				
 				<p class="login button">
 					<?php echo CHtml::submitButton( $model->isNewRecord ? 'Create' : 'Save',  array(
 					'value'=>'Daftar', 'class'=>'btn btn-primary btn-sm' )); ?>

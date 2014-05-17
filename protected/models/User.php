@@ -28,10 +28,11 @@ class User extends CActiveRecord {
         // will receive user inputs.
         return array(
             array('username, password, level_id', 'required'),
-            array('username', 'unique', 'message' => 'This username already exists.','on' => 'create'),
+            array('username', 'unique', 'message' => 'This username already exists.'),
             array('level_id', 'numerical', 'integerOnly' => true),
-            array('verifyCode', 'captcha', 'allowEmpty' => !extension_loaded('gd')),
-            array('username, password', 'length', 'max' => 128),
+            array('verifyCode', 'captcha', 'allowEmpty' => !extension_loaded('gd'), 'on' => 'create'),
+            array('username, password', 'length', 'max' => 128, 'min' => 6),
+            
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, username, password, level_id', 'safe', 'on' => 'search'),

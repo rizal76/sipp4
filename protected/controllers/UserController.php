@@ -103,7 +103,7 @@ class UserController extends Controller {
             // 	$model->level_id=1;
             // }
             // else {
-            //$model->scenario = 'create';
+            $model->scenario = 'create';
             $model->level_id = 0;
             //}
 
@@ -283,7 +283,7 @@ class UserController extends Controller {
             $model->attributes = $_POST['User'];
             $user = User::model()->find('LOWER(username)=?', array($model->username));
             //cek jika 
-        
+
             if ($user != null) {
                 //make a verifed code
                 $verCode = $user->hashPassword($user->password);
