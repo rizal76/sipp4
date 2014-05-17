@@ -296,7 +296,7 @@ class UserController extends Controller {
                 $user->sendMail($model->username, $verCode);
                 Yii::app()->user->setFlash('success', "Sukses ! Silahkan periksa inbox email anda");
             } else {
-                Yii::app()->user->setFlash('error', "Gagal ! Email tidak terdaftar ! ");
+                Yii::app()->user->setFlash('error', "Gagal ! Pastikan email benar dan sudah terdaftar ! ");
             }
         }
         // display the login form

@@ -31,21 +31,6 @@
 			</div>
 
 			
-			<div class="row"> 
-				<?php if (extension_loaded('gd')): ?> 
-					<div class="row"> 
-						<?php echo CHtml::activeLabelEx($model, 'verifyCode') ?> 
-						<div> 
-							<?php $this->widget('CCaptcha'); ?>
-						</div> 
-					</div> 
-					<div class="col-sm-2"> 
-						<?php echo CHtml::activeTextField($model,'verifyCode',array('class'=>'form-control','placeholder'=>'verify code*')); ?>
-					<div class="hint">Ketik tulisan yang ada pada gambar. 
-						<br/>Tulisan tidak case sensitive</div>
-						</div> 
-					<?php endif; ?> 
-				</div> 
 				</div></br></br>
 				<div class="row button">
 					<p class="login button">
