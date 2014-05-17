@@ -12,10 +12,7 @@
 	<input type="submit" value="Login" />
 </p>
 
-<p class="tek-login"> if you dont have account, please register 
-<?php 
-echo CHtml::link('register',array('user/create'));
-?> or you forget account click 
+<p class="tek-login"> if you forget account click 
 <?php 
 echo CHtml::link('forget',array('user/forget'));
 ?>

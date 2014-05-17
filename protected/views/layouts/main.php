@@ -52,6 +52,8 @@
 							</a>";
 							}
 							?>
+                                                        <li><?php echo CHtml::link('Register', array('user/create')); ?></li>
+							
 							<?php 
 								/////////////////MENU UNTUK MASING MASING ROLE ////////////
 								if(!Yii::app()->user->isGuest) {
