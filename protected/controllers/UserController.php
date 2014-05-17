@@ -40,7 +40,6 @@ class UserController extends Controller {
                 'actions' => array('create', 'update', 'forget'),
                 //'users'=>array('*'),
                 'expression' => 'Yii::app()->user->isGuest',
-                'deniedCallback' => $this->redirect('/'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
                 'actions' => array('updateAdmin', 'viewAdmin', 'delete', 'admin', 'createAdmin'),
