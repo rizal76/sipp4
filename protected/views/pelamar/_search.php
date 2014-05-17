@@ -32,8 +32,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'tanggal_lahir'); ?>
-		<?php echo $form->textField($model,'tanggal_lahir'); ?>
+		<?php echo $form->label($model,'umur'); ?>
+		<?php echo $form->textField($model,'umur'); ?>
 	</div>
 
 	<div class="row">

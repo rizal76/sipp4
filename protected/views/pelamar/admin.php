@@ -24,7 +24,7 @@ $('.search-form form').submit(function(){
 //    'data'=>$model,
 //    'columns'=>array(	
 //        'nama',
-//        'tanggal_lahir', 
+//        'umur', 
 //        'jenis_kelamin', 
 //        'status',
 //		'kota',
@@ -44,7 +44,7 @@ $('.search-form form').submit(function(){
  		'no_ktp',
  		'nama',
  		'tempat_lahir',
- 		'tanggal_lahir',
+ 		'umur',
  		'jenis_kelamin',
  		/*
  		'status',

@@ -21,8 +21,8 @@
 	<?php echo CHtml::encode($data->tempat_lahir); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('tanggal_lahir')); ?>:</b>
-	<?php echo CHtml::encode($data->tanggal_lahir); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('umur')); ?>:</b>
+	<?php echo CHtml::encode($data->umur); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('jenis_kelamin')); ?>:</b>

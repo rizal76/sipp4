@@ -50,11 +50,12 @@
 							echo "<a type='button' class='pop' data-container='body' data-toggle='popover' data-placement='bottom' data-content='' data-html='true'>
   								Login
 							</a>";
-							}
+							
 							?>
                                                         <li><?php echo CHtml::link('Register', array('user/create')); ?></li>
 							
 							<?php 
+                                                        }
 								/////////////////MENU UNTUK MASING MASING ROLE ////////////
 								if(!Yii::app()->user->isGuest) {
 								    // MENU FOR SUPER ADMIN ////

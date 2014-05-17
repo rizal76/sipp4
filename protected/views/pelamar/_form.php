@@ -42,28 +42,14 @@
 						<td><?php echo $form->textField($model,'tempat_lahir',array('size'=>30,'maxlength'=>20)); ?></td>
 					</tr>
 					<tr>
-						<th><?php echo $form->labelEx($model,'tanggal_lahir'); ?></th>
-						<td><?php 	
-							$this->widget('zii.widgets.jui.CJuiDatePicker',array(
-								'name'=>'tanggal_lahir',
-								'model'=>$model,
-
-								'attribute'=>'tanggal_lahir',
-			    // additional javascript options for the date picker plugin
-								'options'=>array(
-									'showAnim'=>'fold',
-									'dateFormat'=>'yy-mm-dd',
-									),
-								'htmlOptions'=>array(
-									'type'=>'date'
-									),
-									)); ?></td>
+						<th><?php echo $form->labelEx($model,'umur'); ?></th>
+						<td><?php echo $form->textField($model,'umur'); ?></td>
 								</tr>
 								<tr>
 									<th><?php echo $form->labelEx($model,'jenis_kelamin'); ?></th>
 									<td><?php echo $form->dropDownList($model,'jenis_kelamin',array(
-										'Male'=>'Male', 
-										'Female'=>'Female')); ?></td>
+										'M'=>'M', 
+										'F'=>'F')); ?></td>
 									</tr>
 									<tr>
 										<th><?php echo $form->labelEx($model,'status'); ?></th>

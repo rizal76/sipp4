@@ -11,7 +11,7 @@ echo '<div class="flash-' . $key . '">' . $message . "</div>\n";
 		'no_ktp',
 		'nama',
 		'tempat_lahir',
-		'tanggal_lahir',
+		'umur',
 		'jenis_kelamin',
 		'status',
 		'jumlah_anak',

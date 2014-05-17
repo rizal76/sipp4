@@ -23,7 +23,7 @@ $this->widget('application.extensions.tablesorter.Sorter', array(
 //            'value'=>'$data->admin->departemen', // this will access the current group's 1st member and give out the firstname of that member
 //             // this tells that the value type is raw and no formatting is to be applied to it
 //         ),
-        'tanggal_lahir', 
+        'umur', 
         'jenis_kelamin', 
         'status',
 		'kota',
@@ -44,7 +44,7 @@ $this->widget('application.extensions.tablesorter.Sorter', array(
 // 		'no_ktp',
 // 		'nama',
 // 		'tempat_lahir',
-// 		'tanggal_lahir',
+// 		'umur',
 // 		'jenis_kelamin',
 // 		/*
 // 		'status',

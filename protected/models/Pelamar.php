@@ -8,7 +8,7 @@
  * @property string $no_ktp
  * @property string $nama
  * @property string $tempat_lahir
- * @property string $tanggal_lahir
+ * @property string $umur
  * @property string $jenis_kelamin
  * @property string $status
  * @property integer $jumlah_anak
@@ -39,8 +39,8 @@ class Pelamar extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('no_ktp, nama, tempat_lahir, tanggal_lahir, jenis_kelamin, status, jumlah_anak, alamat, kota, tlp, pendidikan, tahun_lulus, skill, gaji, cv', 'required'),
-            array('jumlah_anak', 'numerical', 'integerOnly' => true),
+            array('no_ktp, nama, tempat_lahir, umur, jenis_kelamin, status, jumlah_anak, alamat, kota, tlp, pendidikan, tahun_lulus, skill, gaji, cv', 'required'),
+            array('jumlah_anak, umur', 'numerical', 'integerOnly' => true),
             array('no_ktp, tempat_lahir, jenis_kelamin, status, kota, tlp, jurusan', 'length', 'max' => 20),
             array('nama, gaji', 'length', 'max' => 30),
             array('alamat', 'length', 'max' => 999),
@@ -50,7 +50,7 @@ class Pelamar extends CActiveRecord {
             array('cv', 'file', 'types' => 'pdf'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, no_ktp, nama, tempat_lahir, tanggal_lahir, jenis_kelamin, status, jumlah_anak, alamat, kota, tlp, pendidikan, jenjang, jurusan, tahun_lulus, skill, gaji, cv', 'safe', 'on' => 'search'),
+            array('id, no_ktp, nama, tempat_lahir, umur, jenis_kelamin, status, jumlah_anak, alamat, kota, tlp, pendidikan, jenjang, jurusan, tahun_lulus, skill, gaji, cv', 'safe', 'on' => 'search'),
         );
     }
 
@@ -75,7 +75,7 @@ class Pelamar extends CActiveRecord {
             'no_ktp' => 'No Ktp',
             'nama' => 'Nama',
             'tempat_lahir' => 'Tempat Lahir',
-            'tanggal_lahir' => 'Tanggal Lahir',
+            'umur' => 'Umur',
             'jenis_kelamin' => 'Jenis Kelamin',
             'status' => 'Status',
             'jumlah_anak' => 'Jumlah Anak',
@@ -113,7 +113,7 @@ class Pelamar extends CActiveRecord {
         $criteria->compare('no_ktp', $this->no_ktp, true);
         $criteria->compare('nama', $this->nama, true);
         $criteria->compare('tempat_lahir', $this->tempat_lahir, true);
-        $criteria->compare('tanggal_lahir', $this->tanggal_lahir, true);
+        $criteria->compare('umur', $this->umur, true);
         $criteria->compare('jenis_kelamin', $this->jenis_kelamin, true);
         $criteria->compare('status', $this->status, true);
         $criteria->compare('jumlah_anak', $this->jumlah_anak);
