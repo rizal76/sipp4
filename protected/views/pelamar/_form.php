@@ -92,7 +92,7 @@
 											</tr>
 											<tr>
 												<th><?php echo $form->labelEx($model,'pendidikan'); ?></th>
-												<td><?php echo $form->textField($model,'pendidikan',array('size'=>70,'maxlength'=>10)); ?></td>
+												<td><?php echo $form->textField($model,'pendidikan',array('size'=>70,'maxlength'=>100)); ?></td>
 											</tr>
 											<tr>
 												<th><?php echo $form->labelEx($model,'jenjang'); ?></th>
@@ -147,7 +147,7 @@
 								<script type="text/javascript">
 									var jumlah = <?php echo count($pengalamans); ?>;
 									function tambah(){
-										var isi = '<table class="table-condensed"><tbody><tr><th>Nama Perusahaan</th><td><input name="PengalamanKerja['+jumlah+'][nama_perusahaan]" id="PengalamanKerja_'+jumlah+'_nama_perusahaan" type="text"></td></tr><tr><th>Gaji Terakhir</th><td><input name="PengalamanKerja['+jumlah+'][gaji_terkahir]" id="PengalamanKerja_'+jumlah+'_gaji_terkahir" type="text" maxlength="30" /></td></tr><tr><th>Tanggal Mulai</th><td> <input name="PengalamanKerja['+jumlah+'][tanggal_mulai]" id="PengalamanKerja_'+jumlah+'_tanggal_mulai" type="date" /> </td></tr><tr><th>Tanggal Akhir</th><td> <input name="PengalamanKerja['+jumlah+'][tanggal_akhir]" id="PengalamanKerja_'+jumlah+'_tanggal_akhir" type="date" /></td></tr> <tr><th>Posisi</th><td> <input name="PengalamanKerja['+jumlah+'][posisi]" id="PengalamanKerja_'+jumlah+'_posisi" type="text" maxlength="20" /></td></tr> <tr><th>Jenis</th><td> <input name="PengalamanKerja['+jumlah+'][jenis]" id="PengalamanKerja_'+jumlah+'_jenis" type="text" maxlength="20" /> </td></tr> <tr><th>Alasan Berhenti</th><td> <textarea name="PengalamanKerja['+jumlah+'][alasan_berhenti]" id="PengalamanKerja_'+jumlah+'_alasan_berhenti"></textarea></td></tr></tbody></table>';	
+										var isi = '<table class="table-condensed"><tbody><tr><td>Pengalaman Kerja</td></tr><tr><th>Nama Perusahaan</th><td><input name="PengalamanKerja['+jumlah+'][nama_perusahaan]" id="PengalamanKerja_'+jumlah+'_nama_perusahaan" type="text"></td></tr><tr><th>Gaji Terakhir</th><td><input name="PengalamanKerja['+jumlah+'][gaji_terkahir]" id="PengalamanKerja_'+jumlah+'_gaji_terkahir" type="text" maxlength="30" /></td></tr><tr><th>Tanggal Mulai</th><td> <input name="PengalamanKerja['+jumlah+'][tanggal_mulai]" id="PengalamanKerja_'+jumlah+'_tanggal_mulai" type="date" /> </td></tr><tr><th>Tanggal Akhir</th><td> <input name="PengalamanKerja['+jumlah+'][tanggal_akhir]" id="PengalamanKerja_'+jumlah+'_tanggal_akhir" type="date" /></td></tr> <tr><th>Posisi</th><td> <input name="PengalamanKerja['+jumlah+'][posisi]" id="PengalamanKerja_'+jumlah+'_posisi" type="text" maxlength="20" /></td></tr> <tr><th>Jenis</th><td> <input name="PengalamanKerja['+jumlah+'][jenis]" id="PengalamanKerja_'+jumlah+'_jenis" type="text" maxlength="20" /> </td></tr> <tr><th>Alasan Berhenti</th><td> <textarea name="PengalamanKerja['+jumlah+'][alasan_berhenti]" id="PengalamanKerja_'+jumlah+'_alasan_berhenti"></textarea></td></tr></tbody></table>';	
 										$("#pengalaman").append(isi); 
 			jumlah++;       // Append new elements
 		}
