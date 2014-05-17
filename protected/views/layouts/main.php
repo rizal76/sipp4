@@ -11,7 +11,7 @@
 	
 	<?php 
     	Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/bootstrap.css');
-    	Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/jquery.js');     
+    	//Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/jquery.js');     
     	Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/bootstrap.js'); 
 	?> 
 	<!--<link href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.min.css" rel="stylesheet">
