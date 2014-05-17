@@ -12,7 +12,7 @@
 	<input type="submit" value="Login" />
 </p>
 
-<p class="tek-login"> if you forget account click 
+<p class="tek-login"> Forget account ? click 
 <?php 
 echo CHtml::link('forget',array('user/forget'));
 ?>
