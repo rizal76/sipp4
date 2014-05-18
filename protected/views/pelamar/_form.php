@@ -30,10 +30,11 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/jquery.j
     ?>
 
     <p class="note">Fields with <span class="required">*</span> are required.</p>
-    <?php echo $form->errorSummary($model); ?>
+   <p class="error-msg"><?php echo $form->errorSummary($model , null , null, array('class'=>'alert alert-danger')); ?></p>
+			
     <?php
     if ($pengalamans != null)
-        echo $form->errorSummary($pengalamans);
+        echo $form->errorSummary($pengalamans , null , null, array('class'=>'alert alert-danger'));
     ?>
     <table class="table-condensed">
         <tbody>

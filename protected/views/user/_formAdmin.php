@@ -19,7 +19,7 @@
 
         <p class="note">Fields with <span class="required">*</span> are required.</p>
 
-        <?php echo $form->errorSummary(array($model, $admin)); ?>
+        <?php echo $form->errorSummary(array($model, $admin), null , null, array('class'=>'alert alert-danger')); ?>
 
         <div class="row">
             <div class="col-sm-2">

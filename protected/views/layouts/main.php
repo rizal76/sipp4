@@ -8,7 +8,7 @@
 	<title><?php echo Yii::app()->name;  ?></title>
 	<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/style.css" rel="stylesheet">
 	<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.css" rel="stylesheet">
-	
+        
 	<?php 
     	Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/bootstrap.css');
     	//Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/jquery.js');     
@@ -29,6 +29,7 @@
 	  });
 	});
   	</script>
+      
 </head>
 <body onload="pop()">
 	<div class="frame">

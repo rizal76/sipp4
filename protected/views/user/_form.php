@@ -12,9 +12,11 @@
 	// There is a call to performAjaxValidation() commented in generated controller code.
 	// See class documentation of CActiveForm for details on this.
 			'enableAjaxValidation'=>false,
-			)); ?>
+			));
+               
+                ?>
 			<p class="note">Fields with <span class="required">*</span> are required.</p>
-			<p class="error-msg"><?php echo $form->errorSummary($model); ?></p>
+			<p class="error-msg"><?php echo $form->errorSummary($model , null , null, array('class'=>'alert alert-danger')); ?></p>
 			<?php
 			if (Yii::app()->controller->action->id == 'create' ) {
 				?>
