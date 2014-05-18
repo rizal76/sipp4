@@ -42,12 +42,12 @@ class Pelamar extends CActiveRecord {
             array('no_ktp, nama, tempat_lahir, umur, jenis_kelamin, status, jumlah_anak, alamat, kota, tlp, pendidikan, tahun_lulus, skill, gaji, cv', 'required'),
             array('no_ktp, tlp, gaji,  jumlah_anak, umur', 'numerical', 'integerOnly' => true),
             array('no_ktp', 'unique', 'message' => 'This NO_KTP already exists.'),
-            array('no_ktp, tempat_lahir, jenis_kelamin, status, kota, tlp, jurusan', 'length', 'max' => 20),
-            array('nama, gaji', 'length', 'max' => 30),
+            array('no_ktp, tempat_lahir, jenis_kelamin, status, kota, tlp, jurusan', 'length', 'max' => 200),
+            array('nama, gaji', 'length', 'max' => 300),
             array('alamat', 'length', 'max' => 999),
-            array('pendidikan, jenjang', 'length', 'max' => 10),
+            array('pendidikan, jenjang', 'length', 'max' => 100),
             array('tahun_lulus', 'length', 'max' => 4),
-            array('skill', 'length', 'max' => 100),
+            array('skill', 'length', 'max' => 400),
             array('cv', 'file', 'types' => 'pdf'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.

@@ -28,10 +28,10 @@ class Lowongan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nama, deskripsi, persyaratan, departemen, new', 'required'),
-			array('nama, new', 'length', 'max'=>30),
-			array('deskripsi', 'length', 'max'=>400),
-			array('persyaratan', 'length', 'max'=>100),
+			array('nama, deskripsi, persyaratan, departemen', 'required'),
+			array('nama, new', 'length', 'max'=>130),
+			array('deskripsi', 'length', 'max'=>7400),
+			array('persyaratan', 'length', 'max'=>7100),
                          array('departemen', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.

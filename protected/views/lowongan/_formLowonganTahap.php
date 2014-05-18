@@ -24,7 +24,9 @@
     <p class="note">Fields with <span class="required">*</span> are required.</p>
 
 
-<?php $count = 0;
+<?php 
+
+$count = 0;
 foreach ($tahaps as $i => $item): ?>
             <?php echo $form->labelEx($item, $item->tahaps->nama); ?>
 

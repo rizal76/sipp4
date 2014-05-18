@@ -25,10 +25,10 @@ class LowonganTahap extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('id_lowongan, id_tahap, deskripsi, file_tugas', 'required'),
+            array('id_lowongan, id_tahap, deskripsi', 'required'),
             array('id_lowongan, id_tahap', 'numerical', 'integerOnly' => true),
             array('deskripsi, file_tugas', 'length', 'max' => 500),
-            // array('file_tugas','file', 'types'=>'pdf'), 
+             array('file_tugas','file', 'allowEmpty' => true, 'types'=>'pdf'), 
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id_lowongan, id_tahap, deskripsi, file_tugas', 'safe', 'on' => 'search'),

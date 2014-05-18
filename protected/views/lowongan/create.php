@@ -1,7 +1,7 @@
 
 <?php
     foreach(Yii::app()->user->getFlashes() as $key => $message) {
-        echo '<div class="flash-' . $key . '">' . $message . "</div>\n";
+        echo '<div class="alert alert-info flash-' . $key . '">' . $message . "</div>\n";
     }
 ?>
 <h1>Create Lowongan </h1>
