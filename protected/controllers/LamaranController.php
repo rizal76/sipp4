@@ -269,14 +269,71 @@ class LamaranController extends Controller {
         }
         //update filter yang null aja yang tampil
         if (Yii::app()->user->isAdmin()) {
-            //cari departemen
+            //cari departemen dan filter by departemen kalo dia admin
             $id = Yii::app()->user->id;
             $modelAdmin = Admin::model()->findByAttributes(array('id_user' => $id));
-            $modelsL = Lamaran::model()->with('lowongan')->findAllByAttributes(array('id_lowongan_tahap' => null), array(
-                'condition' => 'departemen=:departemen',
-                'params' => array('departemen' => $modelAdmin->departemen)));
+            $criteria = new CDbCriteria;
+            $criteria->with = array('lowongan', 'pelamar');
+            $criteria->condition = "id_lowongan_tahap is  null AND lowongan.departemen=:low";
+            $criteria->params = array(':low' => $modelAdmin->departemen);
+
+            $count = Lamaran::model()->count($criteria);
+            $pages = new CPagination($count);
+            // elements per page
+            $pages->pageSize = 10;
+            $pages->applyLimit($criteria);
+            // sorting
+            $sort = new CSort('Lamaran');
+            $sort->multiSort = true;
+            $sort->attributes = array(
+                'pelamar.nama',
+                'lowongan.nama',
+                'pelamarNama' => array(
+                    'asc' => 'pelamar.nama',
+                    'desc' => 'pelamar.nama DESC',
+                    'label' => 'Nama',
+                    'default' => 'desc',
+                ),
+                'lowonganNama' => array(
+                    'asc' => 'lowongan.nama',
+                    'desc' => 'lowongan.nama DESC',
+                    'label' => 'Lowongan',
+                    'default' => 'desc',
+                ),
+            );
+
+            $modelsL = Lamaran::model()->with('lowongan')->findAll($criteria);
         } else {
-            $modelsL = Lamaran::model()->findAllByAttributes(array('id_lowongan_tahap' => null));
+            $criteria = new CDbCriteria;
+            $criteria->condition = 'id_lowongan_tahap is  null';
+            $criteria->with = array('lowongan', 'pelamar');
+
+            $count = Lamaran::model()->count($criteria);
+            $pages = new CPagination($count);
+            // elements per page
+            $pages->pageSize = 10;
+            $pages->applyLimit($criteria);
+            // sorting
+            $sort = new CSort('Lamaran');
+            $sort->multiSort = true;
+            $sort->attributes = array(
+                'pelamar.nama',
+                'lowongan.nama',
+                'pelamarNama' => array(
+                    'asc' => 'pelamar.nama',
+                    'desc' => 'pelamar.nama DESC',
+                    'label' => 'Nama',
+                    'default' => 'desc',
+                ),
+                'lowonganNama' => array(
+                    'asc' => 'lowongan.nama',
+                    'desc' => 'lowongan.nama DESC',
+                    'label' => 'Lowongan',
+                    'default' => 'desc',
+                ),
+            );
+            $sort->applyOrder($criteria);
+            $modelsL = Lamaran::model()->findAll($criteria);
         }
         $this->render('seleksi1', array(
             'modelsL' => $modelsL, // 'modelsP' => $modelsP,
@@ -286,7 +343,6 @@ class LamaranController extends Controller {
     public function actionSeleksiLanjut() {
         //ngeload semua pelamar yang masih dalam proses seleksi ( tahap masih null )
         //search list of lamaran where tahap is null
-        
         //untuk pagination
         $pages;
         //ngeload semua pelamar yang masih dalam proses seleksi ( tahap masih null )
@@ -299,7 +355,7 @@ class LamaranController extends Controller {
             $criteria->with = array('lowongan', 'pelamar');
             $criteria->condition = "id_lowongan_tahap is not null AND lowongan.departemen=:low";
             $criteria->params = array(':low' => $modelAdmin->departemen);
-            
+
             $count = Lamaran::model()->count($criteria);
             $pages = new CPagination($count);
             // elements per page
@@ -404,7 +460,7 @@ class LamaranController extends Controller {
             $criteria->with = array('lowongan', 'pelamar');
             $criteria->condition = "id_lowongan_tahap is not null AND lowongan.departemen=:low";
             $criteria->params = array(':low' => $modelAdmin->departemen);
-            
+
             $count = Lamaran::model()->count($criteria);
             $pages = new CPagination($count);
             // elements per page

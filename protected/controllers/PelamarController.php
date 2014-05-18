@@ -73,7 +73,7 @@ class PelamarController extends Controller {
             $i++;
         }
 
-        if (isset($_POST['Pelamar'], $_POST['PengalamanKerja'])) {
+        if (isset($_POST['Pelamar'])) {
             $model->attributes = $_POST['Pelamar'];
             $sss;
 
@@ -91,20 +91,22 @@ class PelamarController extends Controller {
                 //nyimpan array  pengalaman kerja
                 $valid = true;
                 //nyari pengalaman kerja satu satu
-                foreach ($_POST['PengalamanKerja'] as $j => $modelp) {
-                    //kalo pengalaman kerja oke
-                    if (isset($_POST['PengalamanKerja'][$j])) {
-                        //inisialisasi
-                        $pengalamans[$j] = new PengalamanKerja; // if you had static model only
-                        $pengalamans[$j]->attributes = $modelp;
-                        $pengalamans[$j]->id_pelamar = $model->id;
-                        $valid = $pengalamans[$j]->validate() && $valid;
+                if(isset($_POST['PengalamanKerja'])) {
+                    foreach ($_POST['PengalamanKerja'] as $j => $modelp) {
+                        //kalo pengalaman kerja oke
+                        if (isset($_POST['PengalamanKerja'][$j])) {
+                            //inisialisasi
+                            $pengalamans[$j] = new PengalamanKerja; // if you had static model only
+                            $pengalamans[$j]->attributes = $modelp;
+                            $pengalamans[$j]->id_pelamar = $model->id;
+                            $valid = $pengalamans[$j]->validate() && $valid;
+                        }
                     }
                 }
                 if ($valid) {
                     $model->save();
                     $i = 0;
-                    while (isset($pengalamans[$i])) {
+                    while (($pengalamans[$i]->id_pelamar)!=null) {
                         $pengalamans[$i++]->save(false); // models have already been validated
                     }
                     // belum di cek
@@ -185,7 +187,6 @@ class PelamarController extends Controller {
                     }
                     $this->redirect(array('view', 'id' => $model->id));
                 }
-                
             }
         }
 

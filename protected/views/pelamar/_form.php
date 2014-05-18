@@ -59,7 +59,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/jquery.j
                     echo $form->dropDownList($model, 'jenis_kelamin', array(
                         'M' => 'M',
                         'F' => 'F'));
-    ?></td>
+                    ?></td>
             </tr>
             <tr>
                 <th><?php echo $form->labelEx($model, 'status'); ?></th>
@@ -70,7 +70,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/jquery.j
                         'Duda' => 'Duda',
                         'Janda' => 'Janda',
                     ));
-    ?></td>
+                    ?></td>
             </tr>
             <tr>
                 <th><?php echo $form->labelEx($model, 'jumlah_anak'); ?></th>
@@ -125,15 +125,20 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/jquery.j
     <div id="pengalaman">
         <table class="table-condensed">
             <tbody>
-                <?php foreach ($pengalamans as $i => $item): ?>
-                    <tr><th>Nama Perusahaan</th><td><?php echo CHtml::activeTextField($item, "[$i]nama_perusahaan"); ?></td></tr>
-                    <tr><th>Gaji Terakhir</th><td> <?php echo CHtml::activeTextField($item, "[$i]gaji_terkahir"); ?></td></tr>
-                    <tr><th>Tanggal Mulai</th><td> <?php echo CHtml::activeDateField($item, "[$i]tanggal_mulai"); ?>  Misal: 2014-04-01</td></tr>
-                    <tr><th>Tanggal Akhir</th><td> <?php echo CHtml::activeDateField($item, "[$i]tanggal_akhir"); ?>  Misal: 2014-12-31</td></tr>
-                    <tr><th>Posisi</th><td> <?php echo CHtml::activeTextField($item, "[$i]posisi"); ?></td></tr>
-                    <tr><th>Jenis</th><td> <?php echo CHtml::activeTextField($item, "[$i]jenis"); ?></td></tr>
-                    <tr><th>Alasan Berhenti</th><td> <?php echo CHtml::activeTextArea($item, "[$i]alasan_berhenti"); ?></td></tr>
-<?php endforeach; ?>
+                <?php
+                if (Yii::app()->controller->action->id != 'create') {
+                    foreach ($pengalamans as $i => $item):
+                        ?>
+                        <tr><th>Nama Perusahaan</th><td><?php echo CHtml::activeTextField($item, "[$i]nama_perusahaan"); ?></td></tr>
+                        <tr><th>Gaji Terakhir</th><td> <?php echo CHtml::activeTextField($item, "[$i]gaji_terkahir"); ?></td></tr>
+                        <tr><th>Tanggal Mulai</th><td> <?php echo CHtml::activeDateField($item, "[$i]tanggal_mulai"); ?>  Misal: 2014-04-01</td></tr>
+                        <tr><th>Tanggal Akhir</th><td> <?php echo CHtml::activeDateField($item, "[$i]tanggal_akhir"); ?>  Misal: 2014-12-31</td></tr>
+                        <tr><th>Posisi</th><td> <?php echo CHtml::activeTextField($item, "[$i]posisi"); ?></td></tr>
+                        <tr><th>Jenis</th><td> <?php echo CHtml::activeTextField($item, "[$i]jenis"); ?></td></tr>
+                        <tr><th>Alasan Berhenti</th><td> <?php echo CHtml::activeTextArea($item, "[$i]alasan_berhenti"); ?></td></tr>
+                    <?php endforeach;
+                }
+                ?>
             </tbody>
         </table>	
     </div>
