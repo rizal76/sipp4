@@ -10,37 +10,36 @@ $form = $this->beginWidget('CActiveForm', array(
     'enableAjaxValidation' => false,
         ));
 ?>
-<table id="myTable" class="tablesorter table table-bordered hasFilters tablesorter-bootstrap"> 
+<table  class="table table-bordered"> 
     <thead> 
         <tr> 
-            <th>Nama</th> 
-            <th>Telp.</th> 
-            <th>Pendidikan</th> 
-            <th>Skill</th> 
-            <th>Kota</th> 
-            <th>CV</th> 
-            <th>Expected Salary</th>
-            <th>Lowongan</th>
-            <th>Departemen</th>
+            <th><?php echo $sort->link('pelamarNama')?></th> 
+            <th><?php echo $sort->link('pelamarSex')?></th> 
+            <th><?php echo $sort->link('pelamarEdu')?></th> 
+            <th><?php echo $sort->link('pelamarUmur')?></th> 
+            <th><?php echo $sort->link('pelamarStatus')?></th> 
+            <th><?php echo $sort->link('pelamarKota')?></th> 
+            <th><a href="">CV</a></th>
+            <th><?php echo $sort->link('pelamarGaji')?></th>
+            <th><?php echo $sort->link('lowonganNama')?></th>
             <th>Lolos Administrasi</th>
         </tr> 
     </thead> 
     <tbody> 
         <?php
-        
         foreach ($modelsL as $key => $value) {
 
             echo "<tr><td>" . $value->pelamar->nama . "</td>";
-            echo "<td>" . $value->pelamar->tlp . "</td>";
+            echo "<td>" . $value->pelamar->jenis_kelamin . "</td>";
             echo "<td>" . $value->pelamar->pendidikan . "</td>";
-            echo "<td>" . $value->pelamar->skill . "</td>";
+            echo "<td>" . $value->pelamar->umur . "</td>";
+            echo "<td>" . $value->pelamar->status . "</td>";
             echo "<td>" . $value->pelamar->kota . "</td>";
             echo "<td><a href=" . Yii::app()->request->baseUrl . "/cv/" . $value->pelamar->cv . ">Download</a></td>";
             echo "<td>" . $value->pelamar->gaji . "</td>";
             echo "<td>" . $value->lowongan->nama . "</td>";
-            echo "<td>" . $value->lowongan->departemen . "</td>";
             $id_lt = $value->lowongan->lowongantahaps[0]->id;
-            echo "<td>"  . $form->checkBox($modelsL[$key], '['.$key.']id_lowongan_tahap', array('value' => $id_lt )) . "</td></tr>";
+            echo "<td>" . $form->checkBox($modelsL[$key], '[' . $key . ']id_lowongan_tahap', array('value' => $id_lt)) . "</td></tr>";
         }
         ?>
         <tr> 
@@ -48,18 +47,13 @@ $form = $this->beginWidget('CActiveForm', array(
 
     </tbody> 
 </table> 
-   
-<?php echo CHtml::submitButton('Simpan', array( 'class'=>'btn btn-primary btn-sm' )); ?>
+<?php
+$this->widget('CLinkPager', array(
+    'pages' => $pages,
+))
+?><br>
+<?php echo CHtml::submitButton('Simpan', array('class' => 'btn btn-primary btn-sm')); ?>
 
 
 <?php $this->endWidget(); ?>
 
-<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.js"></script> 
-<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/tablesorter.js"></script>
-<script type="text/javascript">
-    $(document).ready(function()
-    {
-        $("#myTable").tablesorter();
-    }
-    );
-</script>

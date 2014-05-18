@@ -236,16 +236,135 @@ class LamaranController extends Controller {
         //search list of lamaran where tahap is null
         //cek jika dia admin dan filter berdasarkan departemenennya
         $modelsL;
-
+//update filter yang null aja yang tampil
         if (Yii::app()->user->isAdmin()) {
-            //cari departemen
+            //cari departemen dan filter by departemen kalo dia admin
             $id = Yii::app()->user->id;
             $modelAdmin = Admin::model()->findByAttributes(array('id_user' => $id));
-            $modelsL = Lamaran::model()->with('lowongan')->findAllByAttributes(array('id_lowongan_tahap' => null), array(
-                'condition' => 'departemen=:departemen',
-                'params' => array('departemen' => $modelAdmin->departemen)));
+            $criteria = new CDbCriteria;
+            $criteria->with = array('lowongan', 'pelamar');
+            $criteria->condition = "id_lowongan_tahap is  null AND lowongan.departemen=:low";
+            $criteria->params = array(':low' => $modelAdmin->departemen);
+
+            $count = Lamaran::model()->count($criteria);
+            $pages = new CPagination($count);
+            // elements per page
+            $pages->pageSize = 10;
+            $pages->applyLimit($criteria);
+            // sorting
+            $sort = new CSort('Lamaran');
+            $sort->multiSort = true;
+            $sort->attributes = array(
+                'pelamarNama' => array(
+                    'asc' => 'pelamar.nama',
+                    'desc' => 'pelamar.nama DESC',
+                    'label' => 'Nama',
+                    'default' => 'desc',
+                ),
+                'pelamarSex' => array(
+                    'asc' => 'pelamar.jenis_kelamin',
+                    'desc' => 'pelamar.jenis_kelamin DESC',
+                    'label' => 'Gender',
+                    'default' => 'desc',
+                ),
+                'pelamarEdu' => array(
+                    'asc' => 'pelamar.pendidikan',
+                    'desc' => 'pelamar.pendidikan DESC',
+                    'label' => 'Pendidikan',
+                    'default' => 'desc',
+                ),
+                'pelamarUmur' => array(
+                    'asc' => 'pelamar.umur',
+                    'desc' => 'pelamar.umur DESC',
+                    'label' => 'Umur',
+                    'default' => 'desc',
+                ),
+                'pelamarStatus' => array(
+                    'asc' => 'pelamar.status',
+                    'desc' => 'pelamar.status DESC',
+                    'label' => 'Status',
+                ),
+                'pelamarKota' => array(
+                    'asc' => 'pelamar.kota',
+                    'desc' => 'pelamar.kota DESC',
+                    'label' => 'Kota',
+                ),
+                'pelamarGaji' => array(
+                    'asc' => 'pelamar.gaji',
+                    'desc' => 'pelamar.gaji DESC',
+                    'label' => 'gaji',
+                ),
+                'lowonganNama' => array(
+                    'asc' => 'lowongan.nama',
+                    'desc' => 'lowongan.nama DESC',
+                    'label' => 'Lowongan',
+                    'default' => 'desc',
+                ),
+            );
+            $sort->applyOrder($criteria);
+            $modelsL = Lamaran::model()->with('lowongan')->findAll($criteria);
         } else {
-            $modelsL = Lamaran::model()->findAllByAttributes(array('id_lowongan_tahap' => null));
+            $criteria = new CDbCriteria;
+            $criteria->condition = 'id_lowongan_tahap is  null';
+            $criteria->with = array('lowongan', 'pelamar');
+
+            $count = Lamaran::model()->count($criteria);
+            $pages = new CPagination($count);
+            // elements per page
+            $pages->pageSize = 10;
+            $pages->applyLimit($criteria);
+            // sorting
+            $sort = new CSort('Lamaran');
+            $sort->multiSort = true;
+            $sort->attributes = array(
+                'pelamarNama' => array(
+                    'asc' => 'pelamar.nama',
+                    'desc' => 'pelamar.nama DESC',
+                    'label' => 'Nama',
+                    'default' => 'desc',
+                ),
+                'pelamarSex' => array(
+                    'asc' => 'pelamar.jenis_kelamin',
+                    'desc' => 'pelamar.jenis_kelamin DESC',
+                    'label' => 'Gender',
+                    'default' => 'desc',
+                ),
+                'pelamarEdu' => array(
+                    'asc' => 'pelamar.pendidikan',
+                    'desc' => 'pelamar.pendidikan DESC',
+                    'label' => 'Pendidikan',
+                    'default' => 'desc',
+                ),
+                'pelamarUmur' => array(
+                    'asc' => 'pelamar.umur',
+                    'desc' => 'pelamar.umur DESC',
+                    'label' => 'Umur',
+                    'default' => 'desc',
+                ),
+                'pelamarStatus' => array(
+                    'asc' => 'pelamar.status',
+                    'desc' => 'pelamar.status DESC',
+                    'label' => 'Status',
+                ),
+                'pelamarKota' => array(
+                    'asc' => 'pelamar.kota',
+                    'desc' => 'pelamar.kota DESC',
+                    'label' => 'Kota',
+                ),
+                'pelamarGaji' => array(
+                    'asc' => 'pelamar.gaji',
+                    'desc' => 'pelamar.gaji DESC',
+                    'label' => 'gaji',
+                ),
+                'lowonganNama' => array(
+                    'asc' => 'lowongan.nama',
+                    'desc' => 'lowongan.nama DESC',
+                    'label' => 'Lowongan',
+                    'default' => 'desc',
+                ),
+            );
+            $sort->applyOrder($criteria);
+            $modelsL = Lamaran::model()->findAll($criteria);
         }
 
         //kalo ada post maka simpan update nya
@@ -286,13 +405,44 @@ class LamaranController extends Controller {
             $sort = new CSort('Lamaran');
             $sort->multiSort = true;
             $sort->attributes = array(
-                'pelamar.nama',
-                'lowongan.nama',
                 'pelamarNama' => array(
                     'asc' => 'pelamar.nama',
                     'desc' => 'pelamar.nama DESC',
                     'label' => 'Nama',
                     'default' => 'desc',
+                ),
+                'pelamarSex' => array(
+                    'asc' => 'pelamar.jenis_kelamin',
+                    'desc' => 'pelamar.jenis_kelamin DESC',
+                    'label' => 'Gender',
+                    'default' => 'desc',
+                ),
+                'pelamarEdu' => array(
+                    'asc' => 'pelamar.pendidikan',
+                    'desc' => 'pelamar.pendidikan DESC',
+                    'label' => 'Pendidikan',
+                    'default' => 'desc',
+                ),
+                'pelamarUmur' => array(
+                    'asc' => 'pelamar.umur',
+                    'desc' => 'pelamar.umur DESC',
+                    'label' => 'Umur',
+                    'default' => 'desc',
+                ),
+                'pelamarStatus' => array(
+                    'asc' => 'pelamar.status',
+                    'desc' => 'pelamar.status DESC',
+                    'label' => 'Status',
+                ),
+                'pelamarKota' => array(
+                    'asc' => 'pelamar.kota',
+                    'desc' => 'pelamar.kota DESC',
+                    'label' => 'Kota',
+                ),
+                'pelamarGaji' => array(
+                    'asc' => 'pelamar.gaji',
+                    'desc' => 'pelamar.gaji DESC',
+                    'label' => 'gaji',
                 ),
                 'lowonganNama' => array(
                     'asc' => 'lowongan.nama',
@@ -301,7 +451,7 @@ class LamaranController extends Controller {
                     'default' => 'desc',
                 ),
             );
-
+            $sort->applyOrder($criteria);
             $modelsL = Lamaran::model()->with('lowongan')->findAll($criteria);
         } else {
             $criteria = new CDbCriteria;
@@ -317,13 +467,44 @@ class LamaranController extends Controller {
             $sort = new CSort('Lamaran');
             $sort->multiSort = true;
             $sort->attributes = array(
-                'pelamar.nama',
-                'lowongan.nama',
                 'pelamarNama' => array(
                     'asc' => 'pelamar.nama',
                     'desc' => 'pelamar.nama DESC',
                     'label' => 'Nama',
                     'default' => 'desc',
+                ),
+                'pelamarSex' => array(
+                    'asc' => 'pelamar.jenis_kelamin',
+                    'desc' => 'pelamar.jenis_kelamin DESC',
+                    'label' => 'Gender',
+                    'default' => 'desc',
+                ),
+                'pelamarEdu' => array(
+                    'asc' => 'pelamar.pendidikan',
+                    'desc' => 'pelamar.pendidikan DESC',
+                    'label' => 'Pendidikan',
+                    'default' => 'desc',
+                ),
+                'pelamarUmur' => array(
+                    'asc' => 'pelamar.umur',
+                    'desc' => 'pelamar.umur DESC',
+                    'label' => 'Umur',
+                    'default' => 'desc',
+                ),
+                'pelamarStatus' => array(
+                    'asc' => 'pelamar.status',
+                    'desc' => 'pelamar.status DESC',
+                    'label' => 'Status',
+                ),
+                'pelamarKota' => array(
+                    'asc' => 'pelamar.kota',
+                    'desc' => 'pelamar.kota DESC',
+                    'label' => 'Kota',
+                ),
+                'pelamarGaji' => array(
+                    'asc' => 'pelamar.gaji',
+                    'desc' => 'pelamar.gaji DESC',
+                    'label' => 'gaji',
                 ),
                 'lowonganNama' => array(
                     'asc' => 'lowongan.nama',
@@ -336,7 +517,7 @@ class LamaranController extends Controller {
             $modelsL = Lamaran::model()->findAll($criteria);
         }
         $this->render('seleksi1', array(
-            'modelsL' => $modelsL, // 'modelsP' => $modelsP,
+            'modelsL' => $modelsL, 'pages' => $pages, 'sort' => $sort,// 'modelsP' => $modelsP,
         ));
     }
 
@@ -365,8 +546,6 @@ class LamaranController extends Controller {
             $sort = new CSort('Lamaran');
             $sort->multiSort = true;
             $sort->attributes = array(
-                'pelamar.nama',
-                'lowongan.nama',
                 'pelamarNama' => array(
                     'asc' => 'pelamar.nama',
                     'desc' => 'pelamar.nama DESC',
@@ -380,7 +559,7 @@ class LamaranController extends Controller {
                     'default' => 'desc',
                 ),
             );
-
+            $sort->applyOrder($criteria);
             $modelsL = Lamaran::model()->with('lowongan')->findAll($criteria);
         } else {
             $criteria = new CDbCriteria;
@@ -396,8 +575,6 @@ class LamaranController extends Controller {
             $sort = new CSort('Lamaran');
             $sort->multiSort = true;
             $sort->attributes = array(
-                'pelamar.nama',
-                'lowongan.nama',
                 'pelamarNama' => array(
                     'asc' => 'pelamar.nama',
                     'desc' => 'pelamar.nama DESC',
@@ -470,8 +647,6 @@ class LamaranController extends Controller {
             $sort = new CSort('Lamaran');
             $sort->multiSort = true;
             $sort->attributes = array(
-                'pelamar.nama',
-                'lowongan.nama',
                 'pelamarNama' => array(
                     'asc' => 'pelamar.nama',
                     'desc' => 'pelamar.nama DESC',
@@ -485,7 +660,7 @@ class LamaranController extends Controller {
                     'default' => 'desc',
                 ),
             );
-
+            $sort->applyOrder($criteria);
             $modelsL = Lamaran::model()->with('lowongan')->findAll($criteria);
         } else {
             $criteria = new CDbCriteria;
@@ -501,8 +676,6 @@ class LamaranController extends Controller {
             $sort = new CSort('Lamaran');
             $sort->multiSort = true;
             $sort->attributes = array(
-                'pelamar.nama',
-                'lowongan.nama',
                 'pelamarNama' => array(
                     'asc' => 'pelamar.nama',
                     'desc' => 'pelamar.nama DESC',
