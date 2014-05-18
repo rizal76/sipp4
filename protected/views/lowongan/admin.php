@@ -24,6 +24,7 @@ if(Yii::app()->user->isAdmin()) {
 
 $this->widget('zii.widgets.grid.CGridView', array(
     'id' => 'lowongan-grid',
+    'itemsCssClass' => 'table table-bordered',
     'dataProvider' => $model->search(),
     'filter' => $model,
     'columns' => array(

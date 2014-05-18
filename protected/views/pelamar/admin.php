@@ -1,20 +1,4 @@
-<?php
-/* @var $this PelamarController */
-/* @var $model Pelamar */
 
-Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-	$('.search-form').toggle();
-	return false;
-});
-$('.search-form form').submit(function(){
-	$('#pelamar-grid').yiiGridView('update', {
-		data: $(this).serialize()
-	});
-	return false;
-});
-");
-?>
 
 <h1>Daftar Pelamar</h1>
 
@@ -37,6 +21,8 @@ $('.search-form form').submit(function(){
 $link = Yii::app()->baseUrl . '/cv/';
 $this->widget('zii.widgets.grid.CGridView', array(
     'id' => 'pelamar-grid',
+    'itemsCssClass' => 'table table-bordered',
+
     'dataProvider' => $model->search(),
     'filter' => $model,
     'columns' => array(
