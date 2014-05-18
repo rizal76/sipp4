@@ -167,9 +167,9 @@ class LamaranController extends Controller {
                 }
                 //save file tugas 
                 $file->saveAs(Yii::app()->basePath . '/../hasil_tugas/' . $model->hasil_tugas);
-                Yii::app()->user->setFlash('success', 'Tugas anda berhasil di submit. Lihat di ' . CHtml::link('sini', array('lamaran/pengumuman')));
+                Yii::app()->user->setFlash('notification', 'Tugas anda berhasil di submit. Lihat di ' . CHtml::link('sini', array('lamaran/pengumuman')));
             } else {
-                Yii::app()->user->setFlash('notif', 'Tugas gagal di simpan. Pastikan file hasil tugas dalam format .pdf');
+                Yii::app()->user->setFlash('notification', 'Tugas gagal di simpan. Pastikan file hasil tugas dalam format .pdf');
             }
         }
 
@@ -192,9 +192,9 @@ class LamaranController extends Controller {
                 }
                 //save file tugas 
                 $file->saveAs(Yii::app()->basePath . '/../hasil_tugas/' . $model->hasil_tugas2);
-                Yii::app()->user->setFlash('success', 'Tugas 2 anda berhasil di submit. Lihat di ' . CHtml::link('sini', array('lamaran/pengumuman')));
+                Yii::app()->user->setFlash('notification', 'Tugas 2 anda berhasil di submit. Lihat di ' . CHtml::link('sini', array('lamaran/pengumuman')));
             } else {
-                Yii::app()->user->setFlash('notif', 'Tugas 2 gagal di simpan. Pastikan file hasil tugas dalam format .pdf');
+                Yii::app()->user->setFlash('notification', 'Tugas 2 gagal di simpan. Pastikan file hasil tugas dalam format .pdf');
             }
         }
         $this->render('pengumuman', array(

@@ -295,9 +295,9 @@ class UserController extends Controller {
                 $rowCount = $command->execute();
                 //send to email
                 $user->sendMail($model->username, $verCode);
-                Yii::app()->user->setFlash('success', "Sukses ! Silahkan periksa inbox email anda");
+                Yii::app()->user->setFlash('notification', "Sukses ! Silahkan periksa inbox email anda");
             } else {
-                Yii::app()->user->setFlash('error', "Gagal ! Pastikan email benar dan sudah terdaftar ! ");
+                Yii::app()->user->setFlash('notification', "Gagal ! Pastikan email benar dan sudah terdaftar ! ");
             }
         }
         // display the login form

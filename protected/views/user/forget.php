@@ -10,7 +10,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/jquery.js'
 
 <?php
     foreach(Yii::app()->user->getFlashes() as $key => $message) {
-        echo '<div class="flash-' . $key . '">' . $message . "</div>\n";
+        echo '<div class="alert alert-info flash-' . $key . '">' . $message . "</div>\n";
     }
 ?>
 		<?php $form=$this->beginWidget('CActiveForm', array(

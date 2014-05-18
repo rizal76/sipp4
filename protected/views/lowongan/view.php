@@ -3,7 +3,7 @@
 <h1>Lowongan <?php echo $model->nama; ?></h1>
 <?php
 foreach (Yii::app()->user->getFlashes() as $key => $message) {
-    echo '<div class="flash-' . $key . '">' . $message . "</div>\n";
+    echo '<div class="alert alert-info flash-' . $key . '">' . $message . "</div>\n";
 }
 ?>
 
@@ -39,7 +39,7 @@ if (Yii::app()->user->isMember()) {
 
     //kalo udah lamar
     else
-        echo "anda sudah apply lowongan ini";
+        echo "<div class='alert alert-info'>Anda sudah apply lowongan ini</div>";
 }
 if (Yii::app()->user->isGuest) {
     echo CHtml::link('Apply Lowongan', array('lowongan/apply', 'id' => $model->id), array('class' => 'btn btn-primary btn-sm'));
