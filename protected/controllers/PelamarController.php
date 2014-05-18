@@ -83,7 +83,7 @@ class PelamarController extends Controller {
                 $model->id = Yii::app()->user->id;
                 $model->cv = $model->id . '.' . $sss->extensionName;
             }
-            if ($model->save()) {
+            if ($model->validate()) {
                 //save gambar
                 if (strlen(trim($model->cv)) > 0)
                     $sss->saveAs(Yii::app()->basePath . '/../cv/' . $model->cv);
@@ -102,14 +102,14 @@ class PelamarController extends Controller {
                     }
                 }
                 if ($valid) {
+                    $model->save();
                     $i = 0;
                     while (isset($pengalamans[$i])) {
                         $pengalamans[$i++]->save(false); // models have already been validated
                     }
-                    // trigger_error(" save pengalamans");
+                    // belum di cek
+                    $this->redirect(array('view', 'id' => $model->id));
                 }
-
-                $this->redirect(array('view', 'id' => $model->id));
             }
         }
 
@@ -149,7 +149,7 @@ class PelamarController extends Controller {
                 }
                 $model->cv = $model->id . '.' . $sss->extensionName;
             }
-            if ($model->save()) {
+            if ($model->validate()) {
                 if (!$noDelete)
                     $sss->saveAs(Yii::app()->basePath . '/../cv/' . $model->cv);
                 //nyimpan array  pengalaman kerja
@@ -178,12 +178,14 @@ class PelamarController extends Controller {
                 }
                 //kalo semua valid baru di simpan
                 if ($valid) {
+                    $model->save();
                     $i = 0;
                     while (isset($pengalamans[$i])) {
                         $pengalamans[$i++]->save(false); // models have already been validated
                     }
+                    $this->redirect(array('view', 'id' => $model->id));
                 }
-                $this->redirect(array('view', 'id' => $model->id));
+                
             }
         }
 

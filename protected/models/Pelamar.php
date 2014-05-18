@@ -40,7 +40,8 @@ class Pelamar extends CActiveRecord {
         // will receive user inputs.
         return array(
             array('no_ktp, nama, tempat_lahir, umur, jenis_kelamin, status, jumlah_anak, alamat, kota, tlp, pendidikan, tahun_lulus, skill, gaji, cv', 'required'),
-            array('jumlah_anak, umur', 'numerical', 'integerOnly' => true),
+            array('no_ktp, tlp, gaji,  jumlah_anak, umur', 'numerical', 'integerOnly' => true),
+            array('no_ktp', 'unique', 'message' => 'This NO_KTP already exists.'),
             array('no_ktp, tempat_lahir, jenis_kelamin, status, kota, tlp, jurusan', 'length', 'max' => 20),
             array('nama, gaji', 'length', 'max' => 30),
             array('alamat', 'length', 'max' => 999),

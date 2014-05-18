@@ -30,7 +30,7 @@ class User extends CActiveRecord {
             array('username, password, level_id', 'required'),
             array('username', 'unique', 'message' => 'This username already exists.'),
             array('level_id', 'numerical', 'integerOnly' => true),
-            array('verifyCode', 'captcha', 'allowEmpty' => !extension_loaded('gd'), 'on' => 'create'),
+            array('verifyCode', 'captcha', 'allowEmpty' => !extension_loaded('gd'), 'on' => 'buat'),
             array('username, password', 'length', 'max' => 128, 'min' => 6),
             
             // The following rule is used by search().

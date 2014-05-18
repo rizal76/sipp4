@@ -16,6 +16,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update Pelamar <?php echo $model->id; ?></h1>
+<h1>Edit Data Diri  <?php echo $model->nama; ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model,  'pengalamans'=>$pengalamans)); ?>

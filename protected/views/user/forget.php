@@ -1,4 +1,7 @@
-
+<?php
+//load jquery yg ga otomatis
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/jquery.js');  
+?>
 
 <h1 style="text-align:center">Forget Password</h1>
 

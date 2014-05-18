@@ -1,3 +1,7 @@
+<?php
+//load jquery yg ga otomatis
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/jquery.js');  
+?>
 <div class="kenapa-traspac">
 <h2>Kenapa TRASPAC</h2>
 <hr>

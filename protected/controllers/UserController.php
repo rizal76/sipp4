@@ -98,12 +98,13 @@ class UserController extends Controller {
         // $this->performAjaxValidation($model);
 
         if (isset($_POST['User'])) {
+            $model->scenario = 'buat';
+            
             $model->attributes = $_POST['User'];
             // if(Yii::app()->user->isSuperAdmin()) {
             // 	$model->level_id=1;
             // }
             // else {
-            $model->scenario = 'create';
             $model->level_id = 0;
             //}
 
