@@ -1,5 +1,6 @@
 
 <h1>Seleksi Lanjutan</h1>
+
 <?php
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'lowongan-form',
@@ -10,11 +11,11 @@ $form = $this->beginWidget('CActiveForm', array(
     'enableAjaxValidation' => false,
         ));
 ?>
-<table id="myTable" class="tablesorter table table-bordered hasFilters tablesorter-bootstrap"> 
+<table  class="table table-bordered"> 
     <thead> 
         <tr> 
-            <th>Nama</th> 
-            <th>Lowongan</th>
+            <th><?php echo $sort->link('pelamarNama')?></th> 
+            <th><?php echo $sort->link('lowonganNama')?></th>
 <!--            <th>Administrasi</th>-->
             <?php
             foreach ($modelsT as $key => $value) {
@@ -60,17 +61,11 @@ $form = $this->beginWidget('CActiveForm', array(
         </tr> 
 
     </tbody> 
+    <?php $this->widget('CLinkPager', array(
+    'pages' => $pages,
+))?>
 </table> 
     <?php echo CHtml::submitButton('Simpan', array( 'class'=>'btn btn-primary btn-sm' )); ?>
 
 <?php $this->endWidget(); ?>
 
-<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.js"></script> 
-<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/tablesorter.js"></script>
-<script type="text/javascript">
-    $(document).ready(function()
-    {
-        $("#myTable").tablesorter();
-    }
-    );
-</script>

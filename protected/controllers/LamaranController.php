@@ -286,9 +286,8 @@ class LamaranController extends Controller {
     public function actionSeleksiLanjut() {
         //ngeload semua pelamar yang masih dalam proses seleksi ( tahap masih null )
         //search list of lamaran where tahap is null
-        //$modelsL;
         if (Yii::app()->user->isAdmin()) {
-            //cari departemen
+            //cari departemen kalo dia admin
             $id = Yii::app()->user->id;
             $modelAdmin = Admin::model()->findByAttributes(array('id_user' => $id));
             $criteria = new CDbCriteria;
@@ -298,28 +297,34 @@ class LamaranController extends Controller {
 
             $modelsL = Lamaran::model()->with('lowongan')->findAll($criteria);
         } else {
+            //kalo dia superadmin tidak usah filter by departemen
             $modelsL = Lamaran::model()->findAll('id_lowongan_tahap is not null');
         }
+        //cari semua tahap untuk membuat header
         $modelsT = Tahap::model()->findAll();
 
         //kalo ada post maka simpan update nya
         if (isset($_POST['Lamaran'])) {
             $valid = true;
             foreach ($_POST['Lamaran'] as $j => $modelp) {
-                //kalo pengalaman kerja oke
+                //kalo ada lamaran index j
                 if (isset($_POST['Lamaran'][$j])) {
+                    //ambil id_lowongan_tahap array dari checklist
                     $id_low_taps = $_POST['Lamaran'][$j]['id_lowongan_tahap'];
                     $tahapClicked = 0;
+                    //cari lowongan_tahap yang dicek paling akhir
                     foreach ($id_low_taps as $low_tahap) {
                         if ($low_tahap != 0) {
                             $tahapClicked = $low_tahap;
                         }
                     }
+                    //set attribut dengan yang baru
                     $modelsL[$j]->attributes = $modelp;
                     $modelsL[$j]->id_lowongan_tahap = $tahapClicked;
                     //$valid = $modelsL[$j]->validate() && $valid;
                 }
             }
+            //save lamaran 
             if ($valid) {
                 $i = 0;
                 while (isset($modelsL[$i])) {
@@ -329,25 +334,82 @@ class LamaranController extends Controller {
                 }
             }
         }
+        //untuk pagination
+        $pages;
         //ngeload semua pelamar yang masih dalam proses seleksi ( tahap masih null )
         //search list of lamaran where tahap is null
         if (Yii::app()->user->isAdmin()) {
-            //cari departemen
+            //cari departemen dan filter by departemen kalo dia admin
             $id = Yii::app()->user->id;
             $modelAdmin = Admin::model()->findByAttributes(array('id_user' => $id));
             $criteria = new CDbCriteria;
-            $criteria->with = array('lowongan');
+            $criteria->with = array('lowongan', 'pelamar');
             $criteria->condition = "id_lowongan_tahap is not null AND lowongan.departemen=:low";
             $criteria->params = array(':low' => $modelAdmin->departemen);
+            
+            $count = Lamaran::model()->count($criteria);
+            $pages = new CPagination($count);
+            // elements per page
+            $pages->pageSize = 10;
+            $pages->applyLimit($criteria);
+            // sorting
+            $sort = new CSort('Lamaran');
+            $sort->multiSort = true;
+            $sort->attributes = array(
+                'pelamar.nama',
+                'lowongan.nama',
+                'pelamarNama' => array(
+                    'asc' => 'pelamar.nama',
+                    'desc' => 'pelamar.nama DESC',
+                    'label' => 'Nama',
+                    'default' => 'desc',
+                ),
+                'lowonganNama' => array(
+                    'asc' => 'lowongan.nama',
+                    'desc' => 'lowongan.nama DESC',
+                    'label' => 'Lowongan',
+                    'default' => 'desc',
+                ),
+            );
 
             $modelsL = Lamaran::model()->with('lowongan')->findAll($criteria);
         } else {
-            $modelsL = Lamaran::model()->findAll('id_lowongan_tahap is not null');
+            $criteria = new CDbCriteria;
+            $criteria->condition = 'id_lowongan_tahap is not null';
+            $criteria->with = array('lowongan', 'pelamar');
+
+            $count = Lamaran::model()->count($criteria);
+            $pages = new CPagination($count);
+            // elements per page
+            $pages->pageSize = 10;
+            $pages->applyLimit($criteria);
+            // sorting
+            $sort = new CSort('Lamaran');
+            $sort->multiSort = true;
+            $sort->attributes = array(
+                'pelamar.nama',
+                'lowongan.nama',
+                'pelamarNama' => array(
+                    'asc' => 'pelamar.nama',
+                    'desc' => 'pelamar.nama DESC',
+                    'label' => 'Nama',
+                    'default' => 'desc',
+                ),
+                'lowonganNama' => array(
+                    'asc' => 'lowongan.nama',
+                    'desc' => 'lowongan.nama DESC',
+                    'label' => 'Lowongan',
+                    'default' => 'desc',
+                ),
+            );
+            $sort->applyOrder($criteria);
+            $modelsL = Lamaran::model()->findAll($criteria);
         }
+        //temukan semua tahap untuk di jadikan header
         $modelsT = Tahap::model()->findAll();
 
         $this->render('seleksi2', array(
-            'modelsL' => $modelsL, 'modelsT' => $modelsT,
+            'modelsL' => $modelsL, 'modelsT' => $modelsT, 'pages' => $pages, 'sort' => $sort,
         ));
     }
 
