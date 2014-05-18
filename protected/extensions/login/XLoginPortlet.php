@@ -70,7 +70,7 @@ class XLoginPortlet extends XPortlet
 				$duration=3600*24*30;   // 30 days
 			else
 				$duration=0;
-			//$user->addError($user->username, $user->password );
+			$user->addError($user->username, $user->password );
 			Yii::app()->user->login($identity ,$duration);
 			//header('Location:'.Yii::app()->request->baseUrl);
 			return true;
