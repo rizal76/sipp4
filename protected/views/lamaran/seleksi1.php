@@ -36,7 +36,7 @@ $form = $this->beginWidget('CActiveForm', array(
             echo "<td>" . $value->pelamar->skill . "</td>";
             echo "<td>" . $value->pelamar->kota . "</td>";
             echo "<td><a href=" . Yii::app()->request->baseUrl . "/cv/" . $value->pelamar->cv . ">Download</a></td>";
-            echo "<td>" . $value->pelamar->cover_letter . "</td>";
+            echo "<td>" . $value->pelamar->gaji . "</td>";
             echo "<td>" . $value->lowongan->nama . "</td>";
             echo "<td>" . $value->lowongan->departemen . "</td>";
             $id_lt = $value->lowongan->lowongantahaps[0]->id;

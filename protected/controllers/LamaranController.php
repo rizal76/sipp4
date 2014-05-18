@@ -150,6 +150,9 @@ class LamaranController extends Controller {
         if (isset($_POST['Lamaran']['hasil_tugas'])) {
 
             $model = $this->loadModel($_POST['Lamaran']['id']);
+            //buat cek kalo udah ada tugas sebelumnya hapus aja
+            $tugasLama = $model->hasil_tugas;
+
             //ambil semua attribut yang di post
             $model->attributes = $_POST['Lamaran'];
             //ambil file
@@ -158,6 +161,10 @@ class LamaranController extends Controller {
             $model->hasil_tugas = $model->id_pelamar . $random . "." . $file->extensionName;
             $model->scenario = 'tugas';
             if ($model->save()) { //save model
+                //hapus tugas yang lama
+                if ($tugasLama != null) {
+                    unlink(Yii::app()->basePath . '/../hasil_tugas/' . $tugasLama);
+                }
                 //save file tugas 
                 $file->saveAs(Yii::app()->basePath . '/../hasil_tugas/' . $model->hasil_tugas);
                 Yii::app()->user->setFlash('success', 'Tugas anda berhasil di submit. Lihat di ' . CHtml::link('sini', array('lamaran/pengumuman')));
@@ -169,6 +176,8 @@ class LamaranController extends Controller {
         if (isset($_POST['Lamaran']['hasil_tugas2'])) {
 
             $model = $this->loadModel($_POST['Lamaran']['id']);
+            //buat cek kalo udah ada tugas sebelumnya hapus aja
+            $tugasLama = $model->hasil_tugas2;
             //ambil semua attribut yang di post
             $model->attributes = $_POST['Lamaran'];
             //ambil file
@@ -177,6 +186,10 @@ class LamaranController extends Controller {
             $model->hasil_tugas2 = $model->id_pelamar . $random . "." . $file->extensionName;
             $model->scenario = 'tugas2';
             if ($model->save()) { //save model
+                //hapus tugas yang lama
+                if ($tugasLama != null) {
+                    unlink(Yii::app()->basePath . '/../hasil_tugas/' . $tugasLama);
+                }
                 //save file tugas 
                 $file->saveAs(Yii::app()->basePath . '/../hasil_tugas/' . $model->hasil_tugas2);
                 Yii::app()->user->setFlash('success', 'Tugas 2 anda berhasil di submit. Lihat di ' . CHtml::link('sini', array('lamaran/pengumuman')));
