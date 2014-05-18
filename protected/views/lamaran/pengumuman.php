@@ -14,11 +14,11 @@ if (count($model) == 0) {
 foreach ($model as $j => $modelp) {
     echo 'Nama Lowongan: ' . $modelp->lowongan->nama . '<br>';
     if (!isset($modelp->proses->deskripsi)) {
-        echo 'sedang seleksi administrasi<br>';
+        echo 'Sedang seleksi administrasi<br>';
     } else {
 
         //cek kalo ada yang submit tugas
-        echo 'sampai tahap: ' . $modelp->proses->tahaps->nama . '<br>';
+        echo 'Sampai tahap: ' . $modelp->proses->tahaps->nama . '<br>';
         echo 'Deskripsi  ' . $modelp->proses->deskripsi . '<br>';
         echo 'File Keterangan : ';
         echo '<a href=' . Yii::app()->baseUrl . '/soal_tugas/' . $modelp->proses->file_tugas . '>Download</a><br>';
