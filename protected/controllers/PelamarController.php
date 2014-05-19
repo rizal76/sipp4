@@ -110,6 +110,7 @@ class PelamarController extends Controller {
                         $pengalamans[$i++]->save(false); // models have already been validated
                     }
                     // belum di cek
+                    Yii::app()->user->setFlash('success', 'Pelamar '.$model->nama.' berhasil di buat');
                     $this->redirect(array('view', 'id' => $model->id));
                 }
             }
@@ -185,6 +186,7 @@ class PelamarController extends Controller {
                     while (isset($pengalamans[$i])) {
                         $pengalamans[$i++]->save(false); // models have already been validated
                     }
+                    Yii::app()->user->setFlash('success', 'Pelamar '.$model->nama.' berhasil di edit');
                     $this->redirect(array('view', 'id' => $model->id));
                 }
             }
@@ -203,12 +205,11 @@ class PelamarController extends Controller {
     public function actionDelete($id) {
         $model = $this->loadModel($id);
         unlink(Yii::app()->basePath . '/../cv/' . $model->cv);
-
-        $model->delete();
-
-        // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+        $this->loadModel($id)->delete();
         if (!isset($_GET['ajax']))
-            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+            Yii::app()->user->setFlash('success', 'Pelamar '.$model->nama.' berhasil di delete');
+        else
+            echo "<div class='alert alert-info'>Pelamar ".$model->nama. " berhasil di delete</div>";
     }
 
     /**

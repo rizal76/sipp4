@@ -210,11 +210,12 @@ class LowonganController extends Controller {
      * @param integer $id the ID of the model to be deleted
      */
     public function actionDelete($id) {
+         $model = $this->loadModel($id);
         $this->loadModel($id)->delete();
         if (!isset($_GET['ajax']))
-            Yii::app()->user->setFlash('success', 'Lowongan berhasil di delete');
+            Yii::app()->user->setFlash('success', 'Lowongan '.$model->nama.' berhasil di delete');
         else
-            echo "<div class='alert alert-info'>Lowongan berhasil di delete</div>";
+            echo "<div class='alert alert-info'>Lowongan ".$model->nama. " berhasil di delete</div>";
     }
 
     /**

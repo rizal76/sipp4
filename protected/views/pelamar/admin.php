@@ -1,7 +1,7 @@
 
 
 <h1>Daftar Pelamar</h1>
-
+<div id="statusMsg"></div>
 <?php
 //
 //$this->widget('application.extensions.tablesorter.Sorter', array(
@@ -59,6 +59,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
          */
         array(
             'class' => 'CButtonColumn',
+            'afterDelete' => 'function(link,success,data){ if(success) $("#statusMsg").html(data); }',
         ),
     ),
 ));
