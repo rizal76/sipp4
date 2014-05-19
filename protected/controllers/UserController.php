@@ -14,6 +14,7 @@ class UserController extends Controller {
     public function filters() {
         return array(
             'accessControl', // perform access control for CRUD operations
+                //'postOnly + delete', // we only allow deletion via POST request
         );
     }
 
@@ -99,7 +100,7 @@ class UserController extends Controller {
 
         if (isset($_POST['User'])) {
             $model->scenario = 'buat';
-            
+
             $model->attributes = $_POST['User'];
             // if(Yii::app()->user->isSuperAdmin()) {
             // 	$model->level_id=1;
@@ -132,7 +133,7 @@ class UserController extends Controller {
                 $numClients = Yii::app()->db->createCommand("SELECT `AUTO_INCREMENT` FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'yii_sipp' AND   TABLE_NAME = 'sipp_user'")->queryScalar() - 1;
                 $admin->id_user = $numClients;
                 $admin->save();
-                 Yii::app()->user->setFlash('notification', "Sukses create admin");
+                Yii::app()->user->setFlash('notification', "Sukses create admin " . $model->username);
                 $this->redirect(array('user/admin'));
             }
         }
@@ -178,6 +179,7 @@ class UserController extends Controller {
                 $admin->id_user = $id;
                 $admin->departemen = $_POST['Admin']['departemen'];
                 $admin->save();
+                Yii::app()->user->setFlash('notification', "Sukses update admin " . $model->username);
                 $this->redirect(array('user/admin'));
             }
         }
@@ -193,11 +195,13 @@ class UserController extends Controller {
      * @param integer $id the ID of the model to be deleted
      */
     public function actionDelete($id) {
+        // Yii::app()->user->setFlash('notification', "Sukses delete admin " );
+        $admin = $this->loadModel($id);
         $this->loadModel($id)->delete();
-
-        // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
         if (!isset($_GET['ajax']))
-            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+            Yii::app()->user->setFlash('success', 'Admin berhasil di delete');
+        else
+            echo "<div class='alert alert-info'>Admin berhasil di delete</div>";
     }
 
     /**

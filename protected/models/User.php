@@ -32,7 +32,6 @@ class User extends CActiveRecord {
             array('level_id', 'numerical', 'integerOnly' => true),
             array('verifyCode', 'captcha', 'allowEmpty' => !extension_loaded('gd'), 'on' => 'buat'),
             array('username, password', 'length', 'max' => 128, 'min' => 6),
-            
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, username, password, level_id', 'safe', 'on' => 'search'),
@@ -112,6 +111,7 @@ class User extends CActiveRecord {
         $this->password = $this->hashPassword($this->password);
         return true;
     }
+
 
     public function sendMail($to, $message) {
         $info = "Please click here to reset your password " . Yii::app()->getBaseUrl(true) . "/index.php?r=user/forgot&code=" . $message;

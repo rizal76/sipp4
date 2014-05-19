@@ -1,14 +1,14 @@
 
 
 <h1>Manage Admin</h1>
-
-<?php
+<div id="statusMsg">
+    <?php
     foreach (Yii::app()->user->getFlashes() as $key => $message) {
         echo '<div class="alert alert-info flash-' . $key . '">' . $message . "</div>\n";
     }
     ?>
-
-<?php echo CHtml::link('Create Admin',array('user/createAdmin'), array('class'=>'btn btn-primary btn-sm')); ?>
+</div>
+<?php echo CHtml::link('Create Admin', array('user/createAdmin'), array('class' => 'btn btn-primary btn-sm')); ?>
 <hr>
 
 <?php
@@ -27,6 +27,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         ),
         array(
             'class' => 'CButtonColumn',
+            'afterDelete' => 'function(link,success,data){ if(success) $("#statusMsg").html(data); }',
             'template' => '{view2}{update2}{delete}',
             'buttons' => array
                 (
