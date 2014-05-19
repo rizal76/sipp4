@@ -24,8 +24,10 @@ class LowonganController extends Controller {
      */
     public function accessRules() {
         //untuk validasi admin yg boleh akses hanya yg sesuai departemennya
+        $self = 'sopo';
         $id = Yii::app()->request->getParam('id');
-        $self = $this->getSelfAccess($id);
+        if ($id != null)
+            $self = $this->getSelfAccess($id);
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
                 'actions' => array('index', 'view'),
@@ -34,6 +36,14 @@ class LowonganController extends Controller {
             array('allow', // allow all users to perform 'index' and 'view' actions
                 'actions' => array('apply'),
                 'expression' => '$user->isMember()',
+            ),
+//            array('allow', // allow all users to perform 'index' and 'view' actions
+//                'actions' => array('admin'),
+//                'expression' => '$user->isSuperAdmin()',
+//            ),
+            array('allow', // allow all users to perform 'index' and 'view' actions
+                'actions' => array('admin'),
+                'expression' => '$user->isAdmin()',
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
                 'actions' => array('admin', 'delete', 'create', 'update'),
