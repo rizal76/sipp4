@@ -132,6 +132,7 @@ class UserController extends Controller {
                 $numClients = Yii::app()->db->createCommand("SELECT `AUTO_INCREMENT` FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'yii_sipp' AND   TABLE_NAME = 'sipp_user'")->queryScalar() - 1;
                 $admin->id_user = $numClients;
                 $admin->save();
+                 Yii::app()->user->setFlash('notification', "Sukses create admin");
                 $this->redirect(array('user/admin'));
             }
         }

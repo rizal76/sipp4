@@ -11,9 +11,11 @@ class SiteController extends Controller
 
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('forget'),
+                'actions' => array('login'),
                  'expression' => 'Yii::app()->user->isGuest',
-            ),);
+            ),
+            
+            );
         }
 	/**
 	 * Declares class-based actions.

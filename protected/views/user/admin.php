@@ -2,6 +2,11 @@
 
 <h1>Manage Admin</h1>
 
+<?php
+    foreach (Yii::app()->user->getFlashes() as $key => $message) {
+        echo '<div class="alert alert-info flash-' . $key . '">' . $message . "</div>\n";
+    }
+    ?>
 
 <?php echo CHtml::link('Create Admin',array('user/createAdmin'), array('class'=>'btn btn-primary btn-sm')); ?>
 <hr>
