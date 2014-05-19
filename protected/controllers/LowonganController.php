@@ -63,34 +63,34 @@ class LowonganController extends Controller {
     public function actionCreate() {
         $model = new Lowongan;
         $rendertahap2 = false;
-// nyari semua tahap yang ada dalam database
+        // nyari semua tahap yang ada dalam database
         $tahaps = Tahap::model()->findAll();
         $sss = null; //untuk file
         if (isset($_POST['LowonganTahap'])) {
             $lowonganTahapsMasuk = array();
             $valid = true;
-//nyari LowonganTahap satu satu
+            //nyari LowonganTahap satu satu
             foreach ($_POST['LowonganTahap'] as $j => $modelp) {
-//kalo LowonganTahap oke
+            //kalo LowonganTahap oke
                 if (isset($_POST['LowonganTahap'][$j])) {
-//inisialisasi
+                    //inisialisasi
                     $lowonganTahapsMasuk[$j] = LowonganTahap::model();
                     $lowonganTahapsMasuk[$j] = new LowonganTahap; // if you had static model only
-// $lowonganTahapsMasuk[$j]->scenario = 'create';
+                    // $lowonganTahapsMasuk[$j]->scenario = 'create';
                     $lowonganTahapsMasuk[$j]->attributes = $modelp;
-//$lowonganTahapsMasuk[$j]->id_lowongan = $model->id;
-//$lowonganTahapsMasuk[$j]->id_tahap =$modelp['id'];
-//                    if (strlen(trim(CUploadedFile::getInstanceByName('LowonganTahap[' . $j . '][file_tugas]'))) > 0) {
-//                        $sss = CUploadedFile::getInstanceByName('LowonganTahap[' . $j . '][file_tugas]');
-//                        $lowonganTahapsMasuk[$j]->file_tugas = $lowonganTahapsMasuk[$j]->id_lowongan . '-' . $lowonganTahapsMasuk[$j]->id_tahap . '.pdf';
-//                    }
+                    //$lowonganTahapsMasuk[$j]->id_lowongan = $model->id;
+                    //$lowonganTahapsMasuk[$j]->id_tahap =$modelp['id'];
+                    //                    if (strlen(trim(CUploadedFile::getInstanceByName('LowonganTahap[' . $j . '][file_tugas]'))) > 0) {
+                    //                        $sss = CUploadedFile::getInstanceByName('LowonganTahap[' . $j . '][file_tugas]');
+                    //                        $lowonganTahapsMasuk[$j]->file_tugas = $lowonganTahapsMasuk[$j]->id_lowongan . '-' . $lowonganTahapsMasuk[$j]->id_tahap . '.pdf';
+                    //                    }
                     if (strlen(trim(CUploadedFile::getInstance($lowonganTahapsMasuk[$j], "[$j]file_tugas"))) > 0) {
                         $sss = CUploadedFile::getInstance($lowonganTahapsMasuk[$j], "[$j]file_tugas");
                         $lowonganTahapsMasuk[$j]->file_tugas = $lowonganTahapsMasuk[$j]->id_lowongan . '-' . $lowonganTahapsMasuk[$j]->id_tahap . '.pdf';
                     }
                     $fileValidasi = false;
                     if (isset($_FILES['LowonganTahap'])) {
-//if($_FILES['LowonganTahap']['name'][$j]!=null)
+                    //if($_FILES['LowonganTahap']['name'][$j]!=null)
                         $extension = end(explode(".", $_FILES['LowonganTahap']['name'][$j]['file_tugas']));
                         if ($extension == "pdf" || $_FILES['LowonganTahap']['type'][$j]['file_tugas'] == null) {
                             $fileValidasi = true;
