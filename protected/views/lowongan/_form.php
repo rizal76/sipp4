@@ -28,11 +28,11 @@
             </tr>
             <tr>
                 <th><?php echo $form->labelEx($model, 'deskripsi'); ?></th>
-                <td><?php echo $form->textArea($model, 'deskripsi', array('size' => 60, 'maxlength' => 7400, 'rows' => 5)); ?></td>
+                <td><?php echo $form->textArea($model, 'deskripsi', array('size' => 9999, 'maxlength' => 9999400, 'rows' => 15)); ?></td>
             </tr>
             <tr>
                 <th><?php echo $form->labelEx($model, 'persyaratan'); ?></th>
-                <td><?php echo $form->textArea($model, 'persyaratan', array('size' => 60, 'maxlength' => 7100, 'rows' => 15)); ?></td>
+                <td><?php echo $form->textArea($model, 'persyaratan', array('size' => 99999, 'maxlength' => 99999900, 'rows' => 15)); ?></td>
             </tr>
             <tr>
                 <th><?php echo $form->labelEx($model, 'departemen'); ?></th>
