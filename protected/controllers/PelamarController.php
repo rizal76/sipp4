@@ -23,6 +23,7 @@ class PelamarController extends Controller {
      * @return array access control rules
      */
     public function accessRules() {
+        //untuk validasi hanya user yang berkah mengakses data dirinya
         $id = Yii::app()->request->getParam('id');
         $self = $this->getSelfAccess($id);
         return array(
