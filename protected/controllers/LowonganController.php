@@ -30,7 +30,7 @@ class LowonganController extends Controller {
             ),
             array('allow', // allow all users to perform 'index' and 'view' actions
                 'actions' => array('apply'),
-                'users' => array('@'),
+                'expression' => '$user->isMember()',
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
                 'actions' => array('admin', 'delete', 'create', 'update'),
