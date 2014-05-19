@@ -131,13 +131,13 @@ class LowonganController extends Controller {
                     if ($modelp['nama'] == 0)
                         $nol++;
             //berarti ga ada yg dicek
-            if ($nol == 5){
+            if ($nol == 5) {
                 $tahapValid = false;
-                 Yii::app()->user->setFlash('notification', 'Silahkan pilih tahap minimal 1');
+                Yii::app()->user->setFlash('notification', 'Silahkan pilih tahap minimal 1');
             }
-                
-            
-            if ($tahapValid && $model->save() ) {
+
+
+            if ($tahapValid && $model->save()) {
                 $lowonganTahaps = array();
                 $valid = true;
 
@@ -193,8 +193,10 @@ class LowonganController extends Controller {
 
         if (isset($_POST['Lowongan'])) {
             $model->attributes = $_POST['Lowongan'];
-            if ($model->save())
+            if ($model->save()) {
+                Yii::app()->user->setFlash('notification', "Sukses update Lowongan " . $model->nama);
                 $this->redirect(array('view', 'id' => $model->id));
+            }
         }
 
         $this->render('update', array(
@@ -209,10 +211,10 @@ class LowonganController extends Controller {
      */
     public function actionDelete($id) {
         $this->loadModel($id)->delete();
-
-// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
         if (!isset($_GET['ajax']))
-            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+            Yii::app()->user->setFlash('success', 'Lowongan berhasil di delete');
+        else
+            echo "<div class='alert alert-info'>Lowongan berhasil di delete</div>";
     }
 
     /**

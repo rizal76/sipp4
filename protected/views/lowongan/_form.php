@@ -5,7 +5,11 @@
 ?>
 
 <div class="form">
-
+<?php
+    foreach(Yii::app()->user->getFlashes() as $key => $message) {
+        echo '<div class="alert alert-info flash-' . $key . '">' . $message . "</div>\n";
+    }
+?>
     <?php
     $form = $this->beginWidget('CActiveForm', array(
         'id' => 'lowongan-form',
@@ -28,11 +32,11 @@
             </tr>
             <tr>
                 <th><?php echo $form->labelEx($model, 'deskripsi'); ?></th>
-                <td><?php echo $form->textArea($model, 'deskripsi', array('size' => 60, 'maxlength' => 7400, 'rows' => 5)); ?></td>
+                <td><?php echo $form->textArea($model, 'deskripsi', array('size' => 60, 'maxlength' => 74000, 'rows' => 5)); ?></td>
             </tr>
             <tr>
                 <th><?php echo $form->labelEx($model, 'persyaratan'); ?></th>
-                <td><?php echo $form->textArea($model, 'persyaratan', array('size' => 60, 'maxlength' => 7100, 'rows' => 15)); ?></td>
+                <td><?php echo $form->textArea($model, 'persyaratan', array('size' => 60, 'maxlength' => 71000, 'rows' => 15)); ?></td>
             </tr>
             <tr>
                 <th><?php echo $form->labelEx($model, 'departemen'); ?></th>

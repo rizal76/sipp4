@@ -1,7 +1,7 @@
 
 <h1>Manage Lowongans</h1>
 
-
+<div id="statusMsg"></div>
 <?php echo CHtml::link('Create Lowongan', array('lowongan/create'), array('class' => 'btn btn-primary btn-sm')); ?>
 <hr>
 <?php
@@ -38,6 +38,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         ),
         array(
             'class' => 'CButtonColumn',
+            'afterDelete' => 'function(link,success,data){ if(success) $("#statusMsg").html(data); }',
         ),
     ),
 ));
