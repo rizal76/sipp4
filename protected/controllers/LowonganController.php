@@ -102,8 +102,8 @@ class LowonganController extends Controller {
                     }
                     $fileValidasi = false;
                     if (isset($_FILES['LowonganTahap'])) {
-                        //if($_FILES['LowonganTahap']['name'][$j]!=null)
             if($_FILES['LowonganTahap']['name'][$j]!=null)
+                        //if($_FILES['LowonganTahap']['name'][$j]!=null)
                         $extension = end(explode(".", $_FILES['LowonganTahap']['name'][$j]['file_tugas']));
                         if ($extension == "pdf" || $_FILES['LowonganTahap']['type'][$j]['file_tugas'] == null) {
                             $fileValidasi = true;
