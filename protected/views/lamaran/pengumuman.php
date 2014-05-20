@@ -20,8 +20,10 @@ foreach ($model as $j => $modelp) {
         //cek kalo ada yang submit tugas
         echo 'Sampai tahap: ' . $modelp->proses->tahaps->nama . '<br>';
         echo 'Deskripsi  ' . $modelp->proses->deskripsi . '<br>';
+        if($modelp->proses->file_tugas!=null) {
         echo 'File Keterangan : ';
         echo '<a href=' . Yii::app()->baseUrl . '/soal_tugas/' . $modelp->proses->file_tugas . '>Download</a><br>';
+        }
         ?>
 
         <!-- kalo ini merupakan tahap 1 atau 2 -->

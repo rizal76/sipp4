@@ -157,8 +157,11 @@ class LamaranController extends Controller {
             $model->attributes = $_POST['Lamaran'];
             //ambil file
             $file = CUploadedFile::getInstance($model, 'hasil_tugas');
-            $random = rand(0, 9999); //random angka untuk lebih secure dan ubah nama databasenya      
+            $random = rand(0, 9999); //random angka untuk lebih secure dan ubah nama databasenya  
+            if($file !=null)    
             $model->hasil_tugas = $model->id_pelamar . $random . "." . $file->extensionName;
+            else
+                Yii::app()->user->setFlash('notification', 'Tugas gagal di simpan. Pastikan file hasil tugas dalam format .pdf');
             $model->scenario = 'tugas';
             if ($model->save()) { //save model
                 //hapus tugas yang lama

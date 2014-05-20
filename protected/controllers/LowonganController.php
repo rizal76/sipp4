@@ -102,7 +102,7 @@ class LowonganController extends Controller {
                     }
                     $fileValidasi = false;
                     if (isset($_FILES['LowonganTahap'])) {
-            if($_FILES['LowonganTahap']['name'][$j]!=null)
+                        if($_FILES['LowonganTahap']['name'][$j]!=null)
                         //if($_FILES['LowonganTahap']['name'][$j]!=null)
                         $extension = end(explode(".", $_FILES['LowonganTahap']['name'][$j]['file_tugas']));
                         if ($extension == "pdf" || $_FILES['LowonganTahap']['type'][$j]['file_tugas'] == null) {
@@ -115,13 +115,16 @@ class LowonganController extends Controller {
 
             if ($valid) {
                 $i = 0;
+                $oke=false;
                 while (isset($lowonganTahapsMasuk[$i])) {
                     $lowonganTahapsMasuk[$i]->save(false); // models have already been validated    
                     if (strlen(trim($lowonganTahapsMasuk[$i]->file_tugas)) > 0) {
                         $sss->saveAs(Yii::app()->basePath . '/../file_tugas/' . $lowonganTahapsMasuk[$i]->file_tugas);
                     }
                     $i++;
+                    $oke = true;
                 }
+                if($oke)
                 Yii::app()->user->setFlash('notification', 'Lowongan berhasil di buat !');
             } else {
                 Yii::app()->user->setFlash('notification', 'Lowongan gagal di simpan. Pastikan sesuai format !');
