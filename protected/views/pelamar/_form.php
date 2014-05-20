@@ -110,7 +110,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/jquery.j
                 <td><?php echo $form->textArea($model, 'skill', array('size' => 70, 'maxlength' => 100)); ?></td>
             </tr>
             <tr>
-                <th><?php echo $form->labelEx($model, 'Gaji*'); ?></th>
+                <th><?php echo $form->labelEx($model, 'Gaji Yang Diharapkan*'); ?></th>
                 <td><?php echo $form->textField($model, 'gaji', array('size' => 100, 'maxlength' => 30)); ?></td>
             </tr>
             <tr>
