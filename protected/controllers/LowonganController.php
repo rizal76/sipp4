@@ -23,6 +23,11 @@ class LowonganController extends Controller {
      * @return array access control rules
      */
     public function accessRules() {
+        //untuk validasi admin yg boleh akses hanya yg sesuai departemennya
+        $self = 'sopo';
+        $id = Yii::app()->request->getParam('id');
+        if ($id != null)
+            $self = $this->getSelfAccess($id);
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
                 'actions' => array('index', 'view'),
@@ -30,15 +35,23 @@ class LowonganController extends Controller {
             ),
             array('allow', // allow all users to perform 'index' and 'view' actions
                 'actions' => array('apply'),
-                'users' => array('@'),
+                'expression' => '$user->isMember()',
             ),
-            array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('admin', 'delete', 'create', 'update'),
+//            array('allow', // allow all users to perform 'index' and 'view' actions
+//                'actions' => array('admin'),
+//                'expression' => '$user->isSuperAdmin()',
+//            ),
+            array('allow', // allow all users to perform 'index' and 'view' actions
+                'actions' => array('admin'),
+                'expression' => '$user->isAdmin()',
+            ),
+            array('allow', // allow all users to perform 'index' and 'view' actions
+                'actions' => array('admin'),
                 'expression' => '$user->isSuperAdmin()',
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('admin', 'delete', 'create', 'update'),
-                'expression' => '$user->isAdmin()',
+                'actions' => array( 'delete', 'create', 'update'),
+                'users' => array($self),
             ),
             array('deny', // deny all users
                 'users' => array('*'),
@@ -63,34 +76,34 @@ class LowonganController extends Controller {
     public function actionCreate() {
         $model = new Lowongan;
         $rendertahap2 = false;
-// nyari semua tahap yang ada dalam database
+        // nyari semua tahap yang ada dalam database
         $tahaps = Tahap::model()->findAll();
         $sss = null; //untuk file
         if (isset($_POST['LowonganTahap'])) {
             $lowonganTahapsMasuk = array();
             $valid = true;
-//nyari LowonganTahap satu satu
+            //nyari LowonganTahap satu satu
             foreach ($_POST['LowonganTahap'] as $j => $modelp) {
-//kalo LowonganTahap oke
                 if (isset($_POST['LowonganTahap'][$j])) {
-//inisialisasi
+                    //inisialisasi
                     $lowonganTahapsMasuk[$j] = LowonganTahap::model();
                     $lowonganTahapsMasuk[$j] = new LowonganTahap; // if you had static model only
-// $lowonganTahapsMasuk[$j]->scenario = 'create';
+                    // $lowonganTahapsMasuk[$j]->scenario = 'create';
                     $lowonganTahapsMasuk[$j]->attributes = $modelp;
-//$lowonganTahapsMasuk[$j]->id_lowongan = $model->id;
-//$lowonganTahapsMasuk[$j]->id_tahap =$modelp['id'];
-//                    if (strlen(trim(CUploadedFile::getInstanceByName('LowonganTahap[' . $j . '][file_tugas]'))) > 0) {
-//                        $sss = CUploadedFile::getInstanceByName('LowonganTahap[' . $j . '][file_tugas]');
-//                        $lowonganTahapsMasuk[$j]->file_tugas = $lowonganTahapsMasuk[$j]->id_lowongan . '-' . $lowonganTahapsMasuk[$j]->id_tahap . '.pdf';
-//                    }
+                    //$lowonganTahapsMasuk[$j]->id_lowongan = $model->id;
+                    //$lowonganTahapsMasuk[$j]->id_tahap =$modelp['id'];
+                    //                    if (strlen(trim(CUploadedFile::getInstanceByName('LowonganTahap[' . $j . '][file_tugas]'))) > 0) {
+                    //                        $sss = CUploadedFile::getInstanceByName('LowonganTahap[' . $j . '][file_tugas]');
+                    //                        $lowonganTahapsMasuk[$j]->file_tugas = $lowonganTahapsMasuk[$j]->id_lowongan . '-' . $lowonganTahapsMasuk[$j]->id_tahap . '.pdf';
+                    //                    }
                     if (strlen(trim(CUploadedFile::getInstance($lowonganTahapsMasuk[$j], "[$j]file_tugas"))) > 0) {
                         $sss = CUploadedFile::getInstance($lowonganTahapsMasuk[$j], "[$j]file_tugas");
                         $lowonganTahapsMasuk[$j]->file_tugas = $lowonganTahapsMasuk[$j]->id_lowongan . '-' . $lowonganTahapsMasuk[$j]->id_tahap . '.pdf';
                     }
                     $fileValidasi = false;
                     if (isset($_FILES['LowonganTahap'])) {
-//if($_FILES['LowonganTahap']['name'][$j]!=null)
+                        //if($_FILES['LowonganTahap']['name'][$j]!=null)
+            if($_FILES['LowonganTahap']['name'][$j]!=null)
                         $extension = end(explode(".", $_FILES['LowonganTahap']['name'][$j]['file_tugas']));
                         if ($extension == "pdf" || $_FILES['LowonganTahap']['type'][$j]['file_tugas'] == null) {
                             $fileValidasi = true;
@@ -210,12 +223,12 @@ class LowonganController extends Controller {
      * @param integer $id the ID of the model to be deleted
      */
     public function actionDelete($id) {
-         $model = $this->loadModel($id);
+        $model = $this->loadModel($id);
         $this->loadModel($id)->delete();
         if (!isset($_GET['ajax']))
-            Yii::app()->user->setFlash('success', 'Lowongan '.$model->nama.' berhasil di delete');
+            Yii::app()->user->setFlash('success', 'Lowongan ' . $model->nama . ' berhasil di delete');
         else
-            echo "<div class='alert alert-info'>Lowongan ".$model->nama. " berhasil di delete</div>";
+            echo "<div class='alert alert-info'>Lowongan " . $model->nama . " berhasil di delete</div>";
     }
 
     /**
@@ -287,6 +300,33 @@ class LowonganController extends Controller {
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'lowongan-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
+        }
+    }
+
+    protected function getSelfAccess($id) {
+        $allow;
+
+        if (!Yii::app()->user->isGuest) { //if it is user, check if it is self
+            //belum di
+            $idUser = Yii::app()->user->id;
+            $modelUser = User::model()->findByPk($idUser);
+
+            if ($modelUser->level_id == 2) {
+                $allow = Yii::app()->user->getName();
+            } elseif ($modelUser->level_id == 1) {
+                //jika dia admin maka periksa di departemennya cocok ga
+                //cari departemen
+                $modelAdmin = Admin::model()->findByAttributes(array('id_user' => $idUser));
+                $modelLowongan = $this->loadModel($id);
+                if ($modelAdmin->departemen == $modelLowongan->departemen) {
+                    $allow = Yii::app()->user->getName();
+                }
+            }
+        }
+        if (!empty($allow)) {
+            return $allow;
+        } else {
+            return false;
         }
     }
 
