@@ -42,15 +42,15 @@ class LowonganController extends Controller {
 //                'expression' => '$user->isSuperAdmin()',
 //            ),
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('admin'),
+                'actions' => array('admin', 'create'),
                 'expression' => '$user->isAdmin()',
             ),
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('admin'),
+                'actions' => array('admin','create'),
                 'expression' => '$user->isSuperAdmin()',
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array( 'delete', 'create', 'update'),
+                'actions' => array( 'delete', 'update'),
                 'users' => array($self),
             ),
             array('deny', // deny all users

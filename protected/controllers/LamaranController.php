@@ -31,7 +31,7 @@ class LamaranController extends Controller {
 //			),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array('pengumuman'),
-                'users' => array('$user->isSuperMember()'),
+                'expression' => '$user->isMember()',
             ),
 //			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 //				'actions'=>array('admin','delete'),
@@ -517,7 +517,7 @@ class LamaranController extends Controller {
             $modelsL = Lamaran::model()->findAll($criteria);
         }
         $this->render('seleksi1', array(
-            'modelsL' => $modelsL, 'pages' => $pages, 'sort' => $sort,// 'modelsP' => $modelsP,
+            'modelsL' => $modelsL, 'pages' => $pages, 'sort' => $sort, // 'modelsP' => $modelsP,
         ));
     }
 
