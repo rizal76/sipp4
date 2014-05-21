@@ -77,6 +77,7 @@ class UserController extends Controller {
             'model' => $this->loadModel($id),
         ));
     }
+
     public function actionView2($id) {
         $this->render('view2', array(
             'model' => $this->loadModel($id),
@@ -158,19 +159,19 @@ class UserController extends Controller {
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
-
         if (isset($_POST['User'], $_POST['Admin'])) {
+
             $model->attributes = $_POST['User'];
+
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id));
         }
-          if (isset($_POST['User'])) {
+        if (isset($_POST['User'])) {
             $model->attributes = $_POST['User'];
-            if ($model->save()){
-                 Yii::app()->user->setFlash('alert-info', "Sukses update password  " . $model->username);
-                 $this->redirect(array('site/login'));
+            if ($model->save()) {
+                Yii::app()->user->setFlash('alert-info', "Sukses update password  " . $model->username);
+                $this->redirect(array('site/login'));
             }
-               
         }
 
         $this->render('update', array(
@@ -184,16 +185,27 @@ class UserController extends Controller {
     public function actionUpdateAdmin($id) {
         $model = $this->loadModel($id);
         $admin = $this->loadModelAdmin($id);
+        $tempPass = $model->password;
 
         if (isset($_POST['User'], $_POST['Admin'])) {
             $model->attributes = $_POST['User'];
-            //$admin->updateDepartemen($id,$newUsedLeaves); // function in model for updating data.
-            if ($model->save()) {
-                $admin->id_user = $id;
-                $admin->departemen = $_POST['Admin']['departemen'];
-                $admin->save();
-                Yii::app()->user->setFlash('notification', "Sukses update admin " . $model->username);
-                $this->redirect(array('user/admin'));
+            //kalo pass ga ganti maka pake password lama, ga usah di enkrip lagi
+            if ($tempPass != $_POST['User']['password']) {
+                //$admin->updateDepartemen($id,$newUsedLeaves); // function in model for updating data.
+                if ($model->save()) {
+                    $admin->id_user = $id;
+                    $admin->departemen = $_POST['Admin']['departemen'];
+                    $admin->save();
+                    Yii::app()->user->setFlash('notification', "Sukses update admin " . $model->username);
+                    $this->redirect(array('user/admin'));
+                }
+            } else {
+                    $admin->id_user = $id;
+                    $admin->departemen = $_POST['Admin']['departemen'];
+                    $admin->save();
+                    Yii::app()->user->setFlash('notification', "Sukses update admin " . $model->username);
+                    $this->redirect(array('user/admin'));
+
             }
         }
 
@@ -212,9 +224,9 @@ class UserController extends Controller {
         $admin = $this->loadModel($id);
         $this->loadModel($id)->delete();
         if (!isset($_GET['ajax']))
-            Yii::app()->user->setFlash('success', 'Admin '.$admin->username.' berhasil di delete');
+            Yii::app()->user->setFlash('success', 'Admin ' . $admin->username . ' berhasil di delete');
         else
-            echo "<div class='alert alert-info'>Admin ".$admin->username." berhasil di delete</div>";
+            echo "<div class='alert alert-info'>Admin " . $admin->username . " berhasil di delete</div>";
     }
 
     /**
@@ -321,8 +333,7 @@ class UserController extends Controller {
         // display the login form
         $this->render('forget', array('model' => $model));
     }
-    
-    
+
     public function actionForgot($code) {
         //cari id
         $user = Yii::app()->db->createCommand()->select('id_user')->from('sipp_code_user')->where('verified_code=:id', array(':id' => $code))->queryScalar();
