@@ -34,11 +34,11 @@ class UserController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view'),
+                'actions' => array('index', 'view', 'view2'),
                 'users' => $self,
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update', 'forget'),
+                'actions' => array('create', 'update', 'forget', 'forgot'),
                 //'users'=>array('*'),
                 'expression' => 'Yii::app()->user->isGuest',
             ),
@@ -74,6 +74,11 @@ class UserController extends Controller {
      */
     public function actionView($id) {
         $this->render('view', array(
+            'model' => $this->loadModel($id),
+        ));
+    }
+    public function actionView2($id) {
+        $this->render('view2', array(
             'model' => $this->loadModel($id),
         ));
     }
@@ -158,6 +163,14 @@ class UserController extends Controller {
             $model->attributes = $_POST['User'];
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id));
+        }
+          if (isset($_POST['User'])) {
+            $model->attributes = $_POST['User'];
+            if ($model->save()){
+                 Yii::app()->user->setFlash('alert-info', "Sukses update password  " . $model->username);
+                 $this->redirect(array('site/login'));
+            }
+               
         }
 
         $this->render('update', array(
@@ -300,13 +313,21 @@ class UserController extends Controller {
                 $rowCount = $command->execute();
                 //send to email
                 $user->sendMail($model->username, $verCode);
-                Yii::app()->user->setFlash('notification', "Sukses ! Silahkan periksa inbox email anda");
+                Yii::app()->user->setFlash('alert-info', "Sukses ! Silahkan periksa inbox email anda");
             } else {
-                Yii::app()->user->setFlash('notification', "Gagal ! Pastikan email benar dan sudah terdaftar ! ");
+                Yii::app()->user->setFlash('alert-danger', "Gagal ! Pastikan email benar dan sudah terdaftar ! ");
             }
         }
         // display the login form
         $this->render('forget', array('model' => $model));
+    }
+    
+    
+    public function actionForgot($code) {
+        //cari id
+        $user = Yii::app()->db->createCommand()->select('id_user')->from('sipp_code_user')->where('verified_code=:id', array(':id' => $code))->queryScalar();
+        ;
+        $this->redirect(array('user/update', 'id' => $user));
     }
 
 }

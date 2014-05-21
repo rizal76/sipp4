@@ -125,9 +125,9 @@ class LowonganController extends Controller {
                     $oke = true;
                 }
                 if($oke)
-                Yii::app()->user->setFlash('notification', 'Lowongan berhasil di buat !');
+                Yii::app()->user->setFlash('alert-info', 'Lowongan berhasil di buat !');
             } else {
-                Yii::app()->user->setFlash('notification', 'Lowongan gagal di simpan. Pastikan sesuai format !');
+                Yii::app()->user->setFlash('alert-danger', 'Lowongan gagal di simpan. Pastikan sesuai format !');
                 $rendertahap2 = true;
                 $this->render('createLowonganTahap', array(
                     'idLowongan' => $model->id, 'tahaps' => $lowonganTahapsMasuk,
@@ -149,7 +149,7 @@ class LowonganController extends Controller {
             //berarti ga ada yg dicek
             if ($nol == 5) {
                 $tahapValid = false;
-                Yii::app()->user->setFlash('notification', 'Silahkan pilih tahap minimal 1');
+                Yii::app()->user->setFlash('alert-danger', 'Silahkan pilih tahap minimal 1');
             }
 
 

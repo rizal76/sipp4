@@ -7,7 +7,7 @@
 <div class="form">
 <?php
     foreach(Yii::app()->user->getFlashes() as $key => $message) {
-        echo '<div class="alert alert-info flash-' . $key . '">' . $message . "</div>\n";
+        echo '<div class="alert ' . $key . '">' . $message . "</div>\n";
     }
 ?>
     <?php
