@@ -68,11 +68,11 @@ class PelamarController extends Controller {
         $model = new Pelamar;
         //objek pengalaman kerja
         $pengalamans = array();
-        $i = 0;
-        while ($i < 1) {
-            $pengalamans[$i] = PengalamanKerja::model();
-            $i++;
-        }
+//        $i = 0;
+//        while ($i < 1) {
+//            $pengalamans[$i] = PengalamanKerja::model();
+//            $i++;
+//        }
 
         if (isset($_POST['Pelamar'])) {
             $model->attributes = $_POST['Pelamar'];
@@ -97,7 +97,7 @@ class PelamarController extends Controller {
                         //kalo pengalaman kerja oke
                         if (isset($_POST['PengalamanKerja'][$j])) {
                             //inisialisasi
-                            $pengalamans[$j] = new PengalamanKerja; // if you had static model only
+                            $pengalamans[$j] = new PengalamanKerja(); // if you had static model only
                             $pengalamans[$j]->attributes = $modelp;
                             $pengalamans[$j]->id_pelamar = $model->id;
                             $valid = $pengalamans[$j]->validate() && $valid;
@@ -107,7 +107,7 @@ class PelamarController extends Controller {
                 if ($valid) {
                     $model->save();
                     $i = 0;
-                    while (($pengalamans[$i]->id_pelamar)!=null) {
+                    while (isset($pengalamans[$i])) {
                         $pengalamans[$i++]->save(false); // models have already been validated
                     }
                     // belum di cek
