@@ -199,9 +199,9 @@ class UserController extends Controller {
         $admin = $this->loadModel($id);
         $this->loadModel($id)->delete();
         if (!isset($_GET['ajax']))
-            Yii::app()->user->setFlash('success', 'Admin '.$admin.username.' berhasil di delete');
+            Yii::app()->user->setFlash('success', 'Admin '.$admin->username.' berhasil di delete');
         else
-            echo "<div class='alert alert-info'>Admin ".$admin.username." berhasil di delete</div>";
+            echo "<div class='alert alert-info'>Admin ".$admin->username." berhasil di delete</div>";
     }
 
     /**
